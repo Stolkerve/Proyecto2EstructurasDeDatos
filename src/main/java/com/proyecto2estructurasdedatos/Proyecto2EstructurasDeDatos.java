@@ -4,6 +4,8 @@
 
 package com.proyecto2estructurasdedatos;
 
+import com.proyecto2estructurasdedatos.containers.HashMap;
+
 /**
  *
  * @author sebas
@@ -11,6 +13,17 @@ package com.proyecto2estructurasdedatos;
 public class Proyecto2EstructurasDeDatos {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        HashMap<String, Integer> map = new HashMap<>();
+        map.insert("Lunes", 0);
+        map.insert("Martes", 1);
+        map.insert("Miercoles", 2);
+        map.insert("Jueves", 3);
+        map.insert("Viernes", 4);
+        map.insert("Sabado", 5);
+        map.insert("Domingo", 6);
+
+        for (var pair : map) {
+            System.out.println("(" + pair.first + ", " + pair.secound + ")");
+        }
     }
 }
