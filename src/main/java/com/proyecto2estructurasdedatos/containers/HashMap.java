@@ -7,11 +7,12 @@ import java.util.Iterator;
  * Contenedor de llave valor basado en la estructura std::unordered_map
  * de la libreria estandar de c++. Con insersion y busqueda
  * O(1) lo mas posible
+ * 
  * @author sebas
  * @param <T> Key type
  * @param <K> Value type
  */
-public class HashMap<T, K> implements Iterable<Pair<T, K>>{
+public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     private List<Pair<T, K>> pairs;
     private int bucketSize = 50;
     private List<Pair<T, K>>[] buckets;
@@ -21,10 +22,9 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>>{
     public HashMap() {
         pairs = new List<>();
         buckets = new List[bucketSize];
-        Arrays.fill(buckets, new List<>());
-        // for (int i = 0; i < buckets.length; i++) {
-        //     buckets[i] = new List<>();
-        // }
+        // Arrays.fill(buckets, new List<>());
+        for (int i = 0; i < buckets.length; i++)
+            buckets[i] = new List<>();
     }
 
     public Pair<T, K> find(T key) {
@@ -62,12 +62,13 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>>{
     private void rehash() {
         if (Float.intBitsToFloat(size) / Float.intBitsToFloat(bucketSize) <= maxLoadFactor)
             return;
-        
+
         bucketSize *= 2;
         List<Pair<T, K>>[] newBuckets = new List[bucketSize];
-        Arrays.fill(newBuckets, new List<>());
+        for (int i = 0; i < newBuckets.length; i++)
+            newBuckets[i] = new List<>();
         for (int i = 0; i < bucketSize / 2; i++) {
-            for (var pair: buckets[i]) {
+            for (var pair : buckets[i]) {
                 newBuckets[hash(pair.first)].pushBack(pair);
             }
         }
@@ -99,4 +100,3 @@ class HashMapIterator<T, K> implements Iterator<Pair<T, K>> {
         return data;
     }
 }
-

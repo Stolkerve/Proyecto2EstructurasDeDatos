@@ -9,6 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
-        <exec.mainClass>com.proyecto2estructurasdedatos.Proyecto2EstructurasDeDatos</exec.mainClass>
+        <exec.mainClass>com.proyecto2estructurasdedatos.MainFrame</exec.mainClass>
     </properties>
 </project>
