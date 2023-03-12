@@ -12,7 +12,7 @@ public class List<T> implements Iterable<T> {
     Node<T> begin;
     Node<T> end;
 
-    List() {
+    public List() {
         this.size = 0;
         this.begin = null;
         this.end = null;
@@ -72,6 +72,12 @@ public class List<T> implements Iterable<T> {
 
         this.end.child = new Node<T>(v, null);
         this.end = this.end.child;
+    }
+
+    public void pushBack(T[] v) {
+        for (T t : v) {
+            pushBack(t);
+        }
     }
 
     public void pushFront(T v) {
