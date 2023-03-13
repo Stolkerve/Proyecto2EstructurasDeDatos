@@ -29,10 +29,7 @@ public class MainPanel extends javax.swing.JPanel {
     public MainPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
-        researchsMap = LoadFileDialog.loadFile(new File("./resumenes2.txt"));
-        for (var pair : researchsMap) {
-            System.out.println(pair.first);
-        }
+        researchsMap = LoadFileDialog.loadFile(new File("./resumenes.txt"));
 
         initComponents();
     }
@@ -61,6 +58,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         var analyzeResearchBtn = new JButton("Analizar resumenes");
         analyzeResearchBtn.addActionListener(e -> {
+            this.addMenuComponent(new AnalyzeResearchMenu(this, researchsMap, "Analizar Resumenes"));
         });
 
         var searchResearchByKeywordBtn = new JButton("Buscar Investigaciones por palabra clave");
@@ -73,10 +71,12 @@ public class MainPanel extends javax.swing.JPanel {
 
         var quitBtn = new JButton("Salir");
         quitBtn.addActionListener(e -> {
+            this.mainFrame.dispose();
         });
 
-        var helpBtn = new JButton(";)");
+        var helpBtn = new JButton("Super cool fractal y super optimizado :O");
         helpBtn.addActionListener(e -> {
+            new FractalDialog();
         });
 
         menuBtns.pushBack(new JButton[] {
@@ -134,7 +134,7 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     /**
-     * @param Menu a insertar
+     * @param Menu insertar un nuevo menu
      */
     private void addMenuComponent(MenuComponent c) {
         this.removeAll();

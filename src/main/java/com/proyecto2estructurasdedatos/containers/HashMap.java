@@ -25,6 +25,10 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
             buckets[i] = new List<>();
     }
 
+    /**
+     * @param key LLave
+     * @return Retorna el valor relacionado a la llave. Null si no existe
+     */
     public Pair<T, K> find(T key) {
         for (var i : buckets[hash(key)]) {
             if (i.first.equals(key))
@@ -33,7 +37,11 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
         return null;
     }
 
-    // modifica el valor si existe!
+    /**
+     * Inserta un nuevo valor. Modifica el valor si existe!
+     * @param key Llave
+     * @param value Valor
+     */
     public void insert(T key, K value) {
         var pair = find(key);
         if (pair != null) {
@@ -49,10 +57,16 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
         this.rehash();
     }
 
+    /**
+     * @return Tamano del HashMap
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * @return Iterador de HashMap
+     */
     public Iterator<Pair<T, K>> iterator() {
         return new HashMapIterator<T, K>(pairs);
     }
@@ -74,11 +88,16 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     }
 
     private int hash(T key) {
-        int hash = key.hashCode() & 0x7FFFFFFF;
-        return hash % bucketSize;
+        return (key.hashCode() & 0x7FFFFFFF) % bucketSize;
     }
 }
 
+/**
+ * Implementacion de iterador para la clase HashMap
+ * @author sebas
+ * @param <T> key type
+ * @param <K> value type
+ */
 class HashMapIterator<T, K> implements Iterator<Pair<T, K>> {
     Node<Pair<T, K>> current;
 

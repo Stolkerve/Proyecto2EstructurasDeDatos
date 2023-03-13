@@ -8,12 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.proyecto2estructurasdedatos.containers.HashMap;
+import com.proyecto2estructurasdedatos.models.Research;
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
 
 /**
  * @author sebas
  */
 public class MenuComponent extends JPanel {
+    HashMap<String, Research> researchsMap;
     MainPanel mainMenuPanel;
 
     /**
@@ -22,8 +25,9 @@ public class MenuComponent extends JPanel {
      * @param mainMenuPanel Panel principal
      * @param title         titulo del menu
      */
-    protected MenuComponent(MainPanel mainMenuPanel, String title) {
+    protected MenuComponent(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         this.mainMenuPanel = mainMenuPanel;
+        this.researchsMap = researchsMap;
         this.initSize();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -47,8 +51,9 @@ public class MenuComponent extends JPanel {
      * 
      * @param mainMenuPanel Panel principal
      */
-    protected MenuComponent(MainPanel mainMenuPanel) {
+    protected MenuComponent(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap) {
         this.mainMenuPanel = mainMenuPanel;
+        this.researchsMap = researchsMap;
         this.initSize();
     }
 

@@ -33,7 +33,8 @@ enum FileState {
 public class LoadFileDialog {
 
     /**
-     * Metodo estatico para cargar el archivo
+     * Metodo estatico para cargar el archivo con intefaz
+     * @return HashMap con todos los resumenes
      */
     public static HashMap<String, Research> loadFileDialog() {
         JFileChooser fileDialog = new JFileChooser("./", FileSystemView.getFileSystemView());
@@ -49,6 +50,11 @@ public class LoadFileDialog {
         return null;
     }
 
+    /**
+     * Metodo estatico para cargar el archivo
+     * @param file Direccion del archivo
+     * @return HashMap con todos los resumenes
+     */
     public static HashMap<String, Research> loadFile(File file) {
         var map = new HashMap<String, Research>();
         try {
@@ -68,7 +74,7 @@ public class LoadFileDialog {
                     case OnTitle:
                         if (map.find(line) != null) {
                             JOptionPane.showMessageDialog(null,
-                                    "Ya existe el resumen " + line + ". Se ignorara.", "ERROR",
+                                    "Ya existe el resumen " + line + " Se ignorara.", "ERROR",
                                     JOptionPane.ERROR_MESSAGE);
                             state = FileState.OnFindNextResearch;
                             continue;
@@ -89,8 +95,12 @@ public class LoadFileDialog {
                     case OnBody:
                         if (line.matches(keywordsPatter)) {
                             state = FileState.OnTitle;
-                            keywords.pushBack(line.substring("Palabras claves:".length()).replace(".", "").split(", "));
+                            keywords.pushBack(line.substring("Palabras claves: ".length()).replace(".", "").split(", "));
                             map.insert(title, new Research(title, body, authors, keywords));
+                            title = "";
+                            body = "";
+                            authors = new List<>();
+                            keywords = new List<>();
                             continue;
                         }
                         body += line;

@@ -8,31 +8,9 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.gui.AssetsLoader;
 import com.proyecto2estructurasdedatos.gui.MainPanel;
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
-
-class Prueba {
-    String titulo;
-    String body;
-
-    public Prueba(String titulo, String body) {
-        this.titulo = titulo;
-        this.body = body;
-    }
-
-    @Override
-    public int hashCode() {
-        return body.hashCode() | titulo.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        Prueba o = (Prueba) obj;
-        return o.body.equals(body) && o.titulo.equals(titulo);
-    }
-}
 
 /**
  *
@@ -76,27 +54,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public static void main(String[] args) {
-        // HashMap<String, Integer> map = new HashMap<>();
-        // map.insert("Lunes", 0);
-        // map.insert("Martes", 1);
-        // map.insert("Miercoles", 2);
-        // map.insert("Jueves", 3);
-        // map.insert("Viernes", 4);
-        // map.insert("Sabado", 5);
-        // map.insert("Domingo", 6);
-
-        // for (var pair : map) {
-        //     System.out.println("(" + pair.first + ", " + pair.secound + ")");
-        // }
-
-        // HashMap<Prueba, Integer> map2 = new HashMap<>();
-        // map2.insert(new Prueba("Titulos", "Body"), 10);
-        // map2.insert(new Prueba("Titulos", "Body"), 20);
-
-        // for (var pair : map2) {
-        //     System.out.println("(" + pair.first + ", " + pair.secound + ")");
-        // }
-
         try {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
             UIDefaults defaults = UIManager.getLookAndFeelDefaults();

@@ -1,6 +1,7 @@
 package com.proyecto2estructurasdedatos.containers;
 
 /**
+ * @author sebas
  * @param <T> Tipo de dato de val
  * @author sebas
  */

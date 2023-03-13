@@ -2,6 +2,9 @@ package com.proyecto2estructurasdedatos.models;
 
 import com.proyecto2estructurasdedatos.containers.List;
 
+/**
+ * Clase resumen
+ */
 public class Research {
     public String title;
     public String body;

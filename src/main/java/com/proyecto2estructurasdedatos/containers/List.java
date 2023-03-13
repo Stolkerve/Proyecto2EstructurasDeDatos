@@ -18,6 +18,9 @@ public class List<T> implements Iterable<T> {
         this.end = null;
     }
 
+    /**
+     * @return Iterador de HashMap
+     */
     public Iterator<T> iterator() {
         return new ListIterator<T>(this);
     }
@@ -26,44 +29,9 @@ public class List<T> implements Iterable<T> {
         return this.size;
     }
 
-    public boolean empty() {
-        return this.size == 0;
-    }
-
-    public boolean remove(int pos) {
-        if (pos > (this.size - 1) || pos < 0)
-            return false;
-        size--;
-
-        Node<T> prevNode = null;
-        Node<T> targetNode = this.begin;
-
-        if (pos == 0) {
-            this.begin = this.begin.child;
-
-            if (this.begin == null) {
-                this.clear();
-            }
-
-            return true;
-        }
-
-        for (int i = 0; i < pos; i++) {
-            prevNode = targetNode;
-            targetNode = targetNode.child;
-        }
-
-        prevNode.child = targetNode.child;
-
-        return true;
-    }
-
-    public void clear() {
-        this.begin = null;
-        this.end = null;
-        this.size = 0;
-    }
-
+    /**
+     * @param v Elemento nuevo en el final del vector
+     */
     public void pushBack(T v) {
         this.size++;
 
@@ -74,38 +42,13 @@ public class List<T> implements Iterable<T> {
         this.end = this.end.child;
     }
 
+    /**
+     * @param v Elementos nuevos en el final del vector
+     */
     public void pushBack(T[] v) {
         for (T t : v) {
             pushBack(t);
         }
-    }
-
-    public void pushFront(T v) {
-        this.size++;
-
-        if (init(v))
-            return;
-
-        Node<T> newNode = new Node<T>(v, this.begin);
-        this.begin = newNode;
-        this.begin.child = newNode;
-    }
-
-    public boolean insert(T v, int pos) {
-        if (pos > (this.size - 1) || pos < 0)
-            return false;
-        this.size++;
-
-        if (init(v))
-            return true;
-
-        Node<T> prevNode = this.begin;
-        for (int i = 0; i < pos; i++) {
-            prevNode = prevNode.child;
-        }
-        Node<T> newNode = new Node<T>(v, prevNode.child);
-        prevNode.child = newNode;
-        return true;
     }
 
     private boolean init(T v) {
@@ -118,6 +61,10 @@ public class List<T> implements Iterable<T> {
     }
 }
 
+/**
+ * Implementacion de iterador para la clase List
+ * @param <T> type
+ */
 class ListIterator<T> implements Iterator<T> {
     Node<T> current;
 
