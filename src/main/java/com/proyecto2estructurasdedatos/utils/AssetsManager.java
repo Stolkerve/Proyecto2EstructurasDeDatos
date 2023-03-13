@@ -31,7 +31,7 @@ public class AssetsManager {
      * @return Retorna el recurso agregado
      */
     public ImageAsset addImage(String path, String name) {
-        ImageAsset newAsset = new ImageAsset(path, name);
+        var newAsset = new ImageAsset(path, name);
         if (newAsset.image.getIconWidth() > 0)
             this.imageAssets.pushBack(newAsset);
         else
@@ -44,7 +44,7 @@ public class AssetsManager {
      * @return Retorna el recurso se si encontro, de lo contrario Null
      */
     public ImageAsset getImage(String name) {
-        for (ImageAsset a : this.imageAssets) {
+        for (var a : this.imageAssets) {
             if (a.name.equals(name))
                 return a;
         }

@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
-import com.proyecto2estructurasdedatos.utils.ImageAsset;
 
 /**
  * @author sebas
@@ -28,10 +27,10 @@ public class MenuComponent extends JPanel {
         this.initSize();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        ImageAsset leftArrow = AssetsManager.getInstance().getImage("left-arrow");
-        JButton backToMenuBtn = new JButton(leftArrow.image);
+        var leftArrow = AssetsManager.getInstance().getImage("left-arrow");
+        var backToMenuBtn = new JButton(leftArrow.image);
         backToMenuBtn.addActionListener(e -> this.backToMainMenu());
-        JPanel topPanel = new JPanel();
+        var topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
         topPanel.add(backToMenuBtn);
         topPanel.add(Box.createHorizontalGlue());
@@ -73,7 +72,7 @@ public class MenuComponent extends JPanel {
      * Forzar las dimenciones del menu
      */
     private void initSize() {
-        Dimension d = this.mainMenuPanel.mainFrame.getSize();
+        var d = this.mainMenuPanel.mainFrame.getSize();
         this.setPreferredSize(new Dimension(d.width, d.height));
         this.setSize(new Dimension(d.width, d.height));
         this.setMaximumSize(new Dimension(d.width, d.height));

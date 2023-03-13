@@ -1,11 +1,15 @@
 package com.proyecto2estructurasdedatos.gui;
 
 import com.proyecto2estructurasdedatos.MainFrame;
+import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.containers.List;
+import com.proyecto2estructurasdedatos.models.Research;
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
-import com.proyecto2estructurasdedatos.utils.ImageAsset;
+import com.proyecto2estructurasdedatos.utils.LoadFileDialog;
 
 import java.awt.*;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +19,7 @@ import javax.swing.JPanel;
  */
 public class MainPanel extends javax.swing.JPanel {
     MainFrame mainFrame;
+    HashMap<String, Research> researchsMap;
 
     /**
      * Crear el panel principal, instancia los componentes del menu principal
@@ -23,6 +28,11 @@ public class MainPanel extends javax.swing.JPanel {
      */
     public MainPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+
+        researchsMap = LoadFileDialog.loadFile(new File("./resumenes2.txt"));
+        for (var pair : researchsMap) {
+            System.out.println(pair.first);
+        }
 
         initComponents();
     }
@@ -33,29 +43,39 @@ public class MainPanel extends javax.swing.JPanel {
     public void initComponents() {
         this.setLayout(new GridLayout());
 
-        List<JButton> menuBtns = new List<JButton>();
+        var menuBtns = new List<JButton>();
 
-        JButton loadResearchBtn = new JButton("Cargar resumenes");
+        var loadResearchBtn = new JButton("Cargar resumenes");
         loadResearchBtn.addActionListener(e -> {
+            researchsMap = LoadFileDialog.loadFileDialog();
+            if (researchsMap != null) {
+                for (JButton btn : menuBtns)
+                    btn.setEnabled(true);
+            }
+            else {
+                for (JButton btn : menuBtns)
+                    btn.setEnabled(false);
+                loadResearchBtn.setEnabled(true);
+            }
         });
 
-        JButton analyzeResearchBtn = new JButton("Analizar resumenes");
+        var analyzeResearchBtn = new JButton("Analizar resumenes");
         analyzeResearchBtn.addActionListener(e -> {
         });
 
-        JButton searchResearchByKeywordBtn = new JButton("Buscar Investigaciones por palabra clave");
+        var searchResearchByKeywordBtn = new JButton("Buscar Investigaciones por palabra clave");
         searchResearchByKeywordBtn.addActionListener(e -> {
         });
 
-        JButton searchResearchByAuthorBtn = new JButton("Buscar Investigaciones por Autor");
+        var searchResearchByAuthorBtn = new JButton("Buscar Investigaciones por Autor");
         searchResearchByAuthorBtn.addActionListener(e -> {
         });
 
-        JButton quitBtn = new JButton("Salir");
+        var quitBtn = new JButton("Salir");
         quitBtn.addActionListener(e -> {
         });
 
-        JButton helpBtn = new JButton(";)");
+        var helpBtn = new JButton(";)");
         helpBtn.addActionListener(e -> {
         });
 
@@ -64,35 +84,39 @@ public class MainPanel extends javax.swing.JPanel {
                 searchResearchByAuthorBtn, quitBtn
         });
 
-        // if (!graph.init) {
-        // for (JButton btn : menuBtns)
-        // btn.setEnabled(false);
-        // loadGraphBtn.setEnabled(true);
-        //
+        if (researchsMap != null) {
+            for (JButton btn : menuBtns)
+                btn.setEnabled(true);
+        }
+        else {
+            for (JButton btn : menuBtns)
+                btn.setEnabled(false);
+            loadResearchBtn.setEnabled(true);
+        }
 
-        JPanel colsPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        var colsPanel = new JPanel(new GridBagLayout());
+        var c = new GridBagConstraints();
 
-        JPanel leftCol = new JPanel(new GridLayout(3, 0));
-        JPanel centerCol = new JPanel(new GridLayout(menuBtns.size() + 1, 0, 0, 20));
-        JPanel rightCol = new JPanel(new GridLayout(3, 0));
+        var leftCol = new JPanel(new GridLayout(3, 0));
+        var centerCol = new JPanel(new GridLayout(menuBtns.size() + 1, 0, 0, 20));
+        var rightCol = new JPanel(new GridLayout(3, 0));
 
-        ImageAsset catKiss = AssetsManager.getInstance().getImage("cat-kiss");
+        var catKiss = AssetsManager.getInstance().getImage("cat-kiss");
         if (catKiss != null) {
             for (int i = 0; i < 3; i++) {
-                JPanel imgPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                var imgPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 imgPanel.add(new JLabel(catKiss.image));
                 leftCol.add(imgPanel);
             }
 
             for (int i = 0; i < 3; i++) {
-                JPanel imgPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                var imgPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 imgPanel.add(new JLabel(catKiss.image));
                 rightCol.add(imgPanel);
             }
         }
 
-        for (JButton btn : menuBtns)
+        for (var btn : menuBtns)
             centerCol.add(btn);
         centerCol.add(helpBtn);
 
@@ -112,7 +136,7 @@ public class MainPanel extends javax.swing.JPanel {
     /**
      * @param Menu a insertar
      */
-    void addMenuComponent(MenuComponent c) {
+    private void addMenuComponent(MenuComponent c) {
         this.removeAll();
         this.add(c);
         this.repaint();

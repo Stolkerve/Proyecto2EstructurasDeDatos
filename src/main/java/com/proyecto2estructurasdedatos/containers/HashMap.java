@@ -2,7 +2,6 @@ package com.proyecto2estructurasdedatos.containers;
 
 import java.util.Arrays;
 import java.util.Iterator;
-
 /**
  * Contenedor de llave valor basado en la estructura std::unordered_map
  * de la libreria estandar de c++. Con insersion y busqueda
@@ -22,7 +21,6 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     public HashMap() {
         pairs = new List<>();
         buckets = new List[bucketSize];
-        // Arrays.fill(buckets, new List<>());
         for (int i = 0; i < buckets.length; i++)
             buckets[i] = new List<>();
     }

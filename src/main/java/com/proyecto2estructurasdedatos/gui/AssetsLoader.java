@@ -43,7 +43,7 @@ public class AssetsLoader {
      * vuela
      */
     public AssetsLoader() {
-        JDialog dialog = new JDialog();
+        var dialog = new JDialog();
         dialog.setModal(true);
         dialog.setSize(320, 180);
         dialog.setLayout(new BorderLayout());
@@ -51,22 +51,22 @@ public class AssetsLoader {
         dialog.setLocationRelativeTo(null);
         dialog.setUndecorated(true);
 
-        JLabel assetLabel = new JLabel();
-        JProgressBar bar = new JProgressBar();
+        var assetLabel = new JLabel();
+        var bar = new JProgressBar();
         bar.setValue(0);
         bar.setStringPainted(true);
 
-        JPanel panel = new JPanel();
+        var panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.add(bar, BorderLayout.CENTER);
         panel.add(assetLabel, BorderLayout.SOUTH);
 
         dialog.add(panel);
 
-        SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>() {
+        var sw = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
-                AssetInfo[] assetsLoadInfo = new AssetInfo[] {
+                var assetsLoadInfo = new AssetInfo[] {
                         new AssetInfo("./src/main/java/com/proyecto2estructurasdedatos/assets/cat-kiss.gif", "cat-kiss", AssetType.Image),
                         new AssetInfo("./src/main/java/com/proyecto2estructurasdedatos/assets/Amazon_icon.png", "amazon-icon",
                                 AssetType.Image),
@@ -77,7 +77,7 @@ public class AssetsLoader {
                 };
 
                 int i = 0;
-                for (AssetInfo assetInfo : assetsLoadInfo) {
+                for (var assetInfo : assetsLoadInfo) {
                     assetLabel.setText(assetInfo.path.substring("./src/main/java/com/proyecto2estructurasdedatos".length()));
                     float porc = ((float) (assetsLoadInfo.length - (assetsLoadInfo.length - i)) / assetsLoadInfo.length)
                             * 100;

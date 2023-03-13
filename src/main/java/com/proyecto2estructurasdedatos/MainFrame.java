@@ -12,7 +12,6 @@ import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.gui.AssetsLoader;
 import com.proyecto2estructurasdedatos.gui.MainPanel;
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
-import com.proyecto2estructurasdedatos.utils.ImageAsset;
 
 class Prueba {
     String titulo;
@@ -60,7 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.setSize(new java.awt.Dimension(this.MIN_WIDTH, MIN_HEIGHT));
         this.setResizable(false);
 
-        ImageAsset icon = AssetsManager.getInstance().getImage("amazon-icon");
+        var icon = AssetsManager.getInstance().getImage("amazon-icon");
         if (icon != null) {
             this.setIconImage(icon.image.getImage());
         }
@@ -77,26 +76,26 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public static void main(String[] args) {
-        HashMap<String, Integer> map = new HashMap<>();
-        map.insert("Lunes", 0);
-        map.insert("Martes", 1);
-        map.insert("Miercoles", 2);
-        map.insert("Jueves", 3);
-        map.insert("Viernes", 4);
-        map.insert("Sabado", 5);
-        map.insert("Domingo", 6);
+        // HashMap<String, Integer> map = new HashMap<>();
+        // map.insert("Lunes", 0);
+        // map.insert("Martes", 1);
+        // map.insert("Miercoles", 2);
+        // map.insert("Jueves", 3);
+        // map.insert("Viernes", 4);
+        // map.insert("Sabado", 5);
+        // map.insert("Domingo", 6);
 
-        for (var pair : map) {
-            System.out.println("(" + pair.first + ", " + pair.secound + ")");
-        }
+        // for (var pair : map) {
+        //     System.out.println("(" + pair.first + ", " + pair.secound + ")");
+        // }
 
-        HashMap<Prueba, Integer> map2 = new HashMap<>();
-        map2.insert(new Prueba("Titulos", "Body"), 10);
-        map2.insert(new Prueba("Titulos", "Body"), 20);
+        // HashMap<Prueba, Integer> map2 = new HashMap<>();
+        // map2.insert(new Prueba("Titulos", "Body"), 10);
+        // map2.insert(new Prueba("Titulos", "Body"), 20);
 
-        for (var pair : map2) {
-            System.out.println("(" + pair.first + ", " + pair.secound + ")");
-        }
+        // for (var pair : map2) {
+        //     System.out.println("(" + pair.first + ", " + pair.secound + ")");
+        // }
 
         try {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
