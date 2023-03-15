@@ -30,7 +30,16 @@ public class SearchByKeywordMenu extends MenuComponent {
         super(mainMenuPanel, researchsMap, title);
         listModel = new DefaultListModel<>();
         keywordsMap = new HashMap<>((v) -> {
-            return v.toUpperCase().hashCode();
+            int fnvPrime = 0x811C9DC5;
+            int hash = 0;
+            var v2 = v.toLowerCase();
+            for (var c : v2.getBytes()) {
+                hash *= fnvPrime;
+                hash ^= c;
+            }
+            return hash;
+        }, (v1, v2) -> {
+            return v1.equalsIgnoreCase(v2);
         });
         researchView = new ResearchView();
         scrollResearchView = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -68,7 +77,7 @@ public class SearchByKeywordMenu extends MenuComponent {
             if (keywordText.length() != 0) {
                 listModel.clear();
                 researchView.setText("<span></span>");
-                var p = keywordsMap.find(keywordText.toUpperCase());
+                var p = keywordsMap.find(keywordText);
                 if (p != null) {
                     for (var r : p.secound) {
                         listModel.addElement(r.title);

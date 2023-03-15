@@ -23,8 +23,8 @@ public class AnalyzeResearchMenu extends MenuComponent {
 
     /**
      * @param mainMenuPanel Menu principal
-     * @param researchsMap HashMap con los resumenes
-     * @param title Titulo del menu
+     * @param researchsMap  HashMap con los resumenes
+     * @param title         Titulo del menu
      */
     public AnalyzeResearchMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         super(mainMenuPanel, researchsMap, title);
@@ -60,7 +60,7 @@ public class AnalyzeResearchMenu extends MenuComponent {
         titlePanel.add(new JLabel("Resumenes"));
         var listPanel = new JPanel(new GridLayout());
         var listModel = new DefaultListModel<String>();
-        
+
         {
             var titles = new String[researchsMap.size()];
             int i = 0;
@@ -77,9 +77,8 @@ public class AnalyzeResearchMenu extends MenuComponent {
         list.addListSelectionListener(e -> {
             var research = researchsMap.find(list.getSelectedValue());
             var titleText = String.format(
-                "<h3 style=\"text-align: center\">%s</h3>",
-                research.secound.title
-            );
+                    "<h3 style=\"text-align: center\">%s</h3>",
+                    research.secound.title);
             int i = 0;
             var authors = "";
             for (var a : research.secound.Authors) {
@@ -91,18 +90,18 @@ public class AnalyzeResearchMenu extends MenuComponent {
                 i++;
             }
             var authorsText = String.format(
-                "<p><b>Autores</b>: %s</p>", authors
-            );
+                    "<p><b>Autores</b>: %s</p>", authors);
 
             var keywordsText = "<ul style=\"margin-left: 10px; list-style-position: inside\">";
             for (var k : research.secound.keywords) {
                 Pattern pattern = Pattern.compile(k);
                 Matcher matcher = pattern.matcher(research.secound.body);
                 var matches = matcher.results().count();
-                keywordsText += String.format("<li><b>%s</b>: tiene <b>%d</b> apariciones en el resumen.</li>", k, matches);
+                keywordsText += String.format("<li><b>%s</b>: tiene <b>%d</b> apariciones en el resumen.</li>", k,
+                        matches);
             }
             keywordsText += "</ul>";
-            
+
             researchTextArea.setText(titleText + authorsText + keywordsText);
         });
 
@@ -133,7 +132,8 @@ public class AnalyzeResearchMenu extends MenuComponent {
         titlePanel.add(new JLabel("Analisis"));
         var listPanel = new JPanel(new GridLayout());
 
-        JScrollPane sp = new JScrollPane(researchTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane sp = new JScrollPane(researchTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         listPanel.add(sp);
 
         c2.fill = GridBagConstraints.HORIZONTAL;
@@ -150,4 +150,3 @@ public class AnalyzeResearchMenu extends MenuComponent {
         return panel;
     }
 }
-

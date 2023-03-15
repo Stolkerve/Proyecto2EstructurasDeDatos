@@ -1,7 +1,9 @@
 package com.proyecto2estructurasdedatos.containers;
 
 import java.util.Iterator;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+
 /**
  * Contenedor de llave valor basado en la estructura std::unordered_map
  * de la libreria estandar de c++. Con insersion y busqueda
@@ -18,25 +20,30 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     private int size = 0;
     private float maxLoadFactor = 1.0f;
     private Function<T, Integer> hashFunc;
+    private BiFunction<T, T, Boolean> cmpFunc;
 
     public HashMap() {
         pairs = new List<>();
         buckets = new List[bucketSize];
         for (int i = 0; i < buckets.length; i++)
             buckets[i] = new List<>();
-        
+
         hashFunc = (v) -> {
             return v.hashCode();
         };
+        cmpFunc = (v1, v2) -> {
+            return v1.equals(v2);
+        };
     }
 
-    public HashMap(Function<T, Integer> hashFunc) {
+    public HashMap(Function<T, Integer> hashFunc, BiFunction<T, T, Boolean> cmpFunc) {
         pairs = new List<>();
         buckets = new List[bucketSize];
         for (int i = 0; i < buckets.length; i++)
             buckets[i] = new List<>();
-        
+
         this.hashFunc = hashFunc;
+        this.cmpFunc = cmpFunc;
     }
 
     /**
@@ -45,8 +52,7 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
      */
     public Pair<T, K> find(T key) {
         for (var i : buckets[hash(key)]) {
-            // if (i.first.equals(key))
-            if (i.first.equals(key))
+            if (cmpFunc.apply(i.first, key))
                 return i;
         }
         return null;
@@ -54,7 +60,8 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
 
     /**
      * Inserta un nuevo valor. Modifica el valor si existe!
-     * @param key Llave
+     * 
+     * @param key   Llave
      * @param value Valor
      */
     public void insert(T key, K value) {
@@ -109,6 +116,7 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
 
 /**
  * Implementacion de iterador para la clase HashMap
+ * 
  * @author sebas
  * @param <T> key type
  * @param <K> value type
