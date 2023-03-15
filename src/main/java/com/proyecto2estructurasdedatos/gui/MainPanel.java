@@ -48,8 +48,7 @@ public class MainPanel extends javax.swing.JPanel {
             if (researchsMap != null) {
                 for (JButton btn : menuBtns)
                     btn.setEnabled(true);
-            }
-            else {
+            } else {
                 for (JButton btn : menuBtns)
                     btn.setEnabled(false);
                 loadResearchBtn.setEnabled(true);
@@ -61,11 +60,12 @@ public class MainPanel extends javax.swing.JPanel {
             this.addMenuComponent(new AnalyzeResearchMenu(this, researchsMap, "Analizar Resumenes"));
         });
 
-        var searchResearchByKeywordBtn = new JButton("Buscar Investigaciones por palabra clave");
+        var searchResearchByKeywordBtn = new JButton("Buscar resumen por palabra clave");
         searchResearchByKeywordBtn.addActionListener(e -> {
+            this.addMenuComponent(new SearchByKeywordMenu(this, researchsMap, "Buscar resumen por palabra clave"));
         });
 
-        var searchResearchByAuthorBtn = new JButton("Buscar Investigaciones por Autor");
+        var searchResearchByAuthorBtn = new JButton("Buscar resumen por Autor");
         searchResearchByAuthorBtn.addActionListener(e -> {
         });
 
@@ -74,9 +74,9 @@ public class MainPanel extends javax.swing.JPanel {
             this.mainFrame.dispose();
         });
 
-        var helpBtn = new JButton("Super cool fractal y super optimizado :O");
+        var helpBtn = new JButton("Super C U B O");
         helpBtn.addActionListener(e -> {
-            new FractalDialog();
+            new Cube();
         });
 
         menuBtns.pushBack(new JButton[] {
@@ -87,8 +87,7 @@ public class MainPanel extends javax.swing.JPanel {
         if (researchsMap != null) {
             for (JButton btn : menuBtns)
                 btn.setEnabled(true);
-        }
-        else {
+        } else {
             for (JButton btn : menuBtns)
                 btn.setEnabled(false);
             loadResearchBtn.setEnabled(true);

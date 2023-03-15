@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.models.Research;
@@ -31,6 +32,7 @@ public class MenuComponent extends JPanel {
         this.initSize();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBorder(new EmptyBorder(2, 2, 2, 2));
         var leftArrow = AssetsManager.getInstance().getImage("left-arrow");
         var backToMenuBtn = new JButton(leftArrow.image);
         backToMenuBtn.addActionListener(e -> this.backToMainMenu());
@@ -43,7 +45,6 @@ public class MenuComponent extends JPanel {
 
         this.add(topPanel);
 
-        this.initMenuComponents();
     }
 
     /**
