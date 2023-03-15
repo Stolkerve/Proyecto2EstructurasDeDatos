@@ -12,11 +12,12 @@ import java.awt.*;
 
 import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.containers.List;
+import com.proyecto2estructurasdedatos.containers.Pair;
 import com.proyecto2estructurasdedatos.models.Research;
 
 public class SearchByAuthorMenu extends MenuComponent {
     DefaultListModel<String> listModel;
-    HashMap<String, List<Research>> authorsMap;
+    List<Pair<String, Research>> authorsList;
     ResearchView researchView;
 
     /**
@@ -27,20 +28,13 @@ public class SearchByAuthorMenu extends MenuComponent {
     public SearchByAuthorMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         super(mainMenuPanel, researchsMap, title);
         listModel = new DefaultListModel<>();
-        authorsMap = new HashMap<>();
+        authorsList = new List<>();
         researchView = new ResearchView();
 
         for (var p : researchsMap) {
             var r = p.secound;
             for (var a : r.Authors) {
-                var researchs = authorsMap.find(a);
-                if (researchs != null) {
-                    researchs.secound.pushBack(r);
-                    continue;
-                }
-                var l = new List<Research>();
-                l.pushBack(r);
-                authorsMap.insert(a, l);
+                authorsList.pushBack(new Pair<>(a, r));
             }
         }
 
@@ -62,13 +56,20 @@ public class SearchByAuthorMenu extends MenuComponent {
             if (authorText.length() != 0) {
                 listModel.clear();
                 researchView.setText("");
-                var p = authorsMap.find(authorText);
-                if (p != null) {
-                    for (var r : p.secound) {
-                        listModel.addElement(r.title);
+                for (var p : authorsList) {
+                    if (p.first.matches(String.format(".*\\b%s\\b.*", authorText))) {
+                        listModel.addElement(p.secound.title);
                     }
-                    return;
                 }
+                if (listModel.size() != 0)
+                    return;
+                // var p = authorsMap.find(authorText);
+                // if (p != null) {
+                //     for (var r : p.secound) {
+                //         listModel.addElement(r.title);
+                //     }
+                //     return;
+                // }
                 JOptionPane.showMessageDialog(this,
                         "No se encontro el autor " + authorText, "ERROR",
                         JOptionPane.ERROR_MESSAGE);
@@ -126,7 +127,7 @@ public class SearchByAuthorMenu extends MenuComponent {
             }
         });
 
-        var sp = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane sp = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         listPanel.add(sp);
 
