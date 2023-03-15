@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
@@ -19,6 +20,7 @@ public class SearchByAuthorMenu extends MenuComponent {
     DefaultListModel<String> listModel;
     List<Pair<String, Research>> authorsList;
     ResearchView researchView;
+    JScrollPane scrollResearchView;
 
     /**
      * @param mainMenuPanel Menu principal
@@ -30,6 +32,8 @@ public class SearchByAuthorMenu extends MenuComponent {
         listModel = new DefaultListModel<>();
         authorsList = new List<>();
         researchView = new ResearchView();
+        scrollResearchView = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         for (var p : researchsMap) {
             var r = p.secound;
@@ -55,21 +59,14 @@ public class SearchByAuthorMenu extends MenuComponent {
             var authorText = authorsInput.getText();
             if (authorText.length() != 0) {
                 listModel.clear();
-                researchView.setText("");
+                researchView.setText("<span></span>");
                 for (var p : authorsList) {
-                    if (p.first.matches(String.format(".*\\b%s\\b.*", authorText))) {
+                    if (p.first.matches(String.format("(?i).*\\b%s\\b.*", authorText))) {
                         listModel.addElement(p.secound.title);
                     }
                 }
                 if (listModel.size() != 0)
                     return;
-                // var p = authorsMap.find(authorText);
-                // if (p != null) {
-                //     for (var r : p.secound) {
-                //         listModel.addElement(r.title);
-                //     }
-                //     return;
-                // }
                 JOptionPane.showMessageDialog(this,
                         "No se encontro el autor " + authorText, "ERROR",
                         JOptionPane.ERROR_MESSAGE);
@@ -124,6 +121,11 @@ public class SearchByAuthorMenu extends MenuComponent {
             if (t != null) {
                 var r = researchsMap.find(t).secound;
                 researchView.setResearch(r);
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        scrollResearchView.getVerticalScrollBar().setValue(0);
+                    }
+                });
             }
         });
 
@@ -154,9 +156,7 @@ public class SearchByAuthorMenu extends MenuComponent {
         titlePanel.add(new JLabel("Resumen"));
         var listPanel = new JPanel(new GridLayout());
 
-        JScrollPane sp = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        listPanel.add(sp);
+        listPanel.add(scrollResearchView);
 
         c2.fill = GridBagConstraints.HORIZONTAL;
         c2.gridy = 0;

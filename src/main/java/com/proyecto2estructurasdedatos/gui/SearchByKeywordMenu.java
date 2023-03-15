@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
@@ -18,6 +19,7 @@ public class SearchByKeywordMenu extends MenuComponent {
     DefaultListModel<String> listModel;
     HashMap<String, List<Research>> keywordsMap;
     ResearchView researchView;
+    JScrollPane scrollResearchView;
 
     /**
      * @param mainMenuPanel Menu principal
@@ -31,6 +33,8 @@ public class SearchByKeywordMenu extends MenuComponent {
             return v.toUpperCase().hashCode();
         });
         researchView = new ResearchView();
+        scrollResearchView = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         for (var p : researchsMap) {
             var r = p.secound;
@@ -63,7 +67,7 @@ public class SearchByKeywordMenu extends MenuComponent {
             var keywordText = keywordInput.getText();
             if (keywordText.length() != 0) {
                 listModel.clear();
-                researchView.setText("");
+                researchView.setText("<span></span>");
                 var p = keywordsMap.find(keywordText.toUpperCase());
                 if (p != null) {
                     for (var r : p.secound) {
@@ -125,6 +129,11 @@ public class SearchByKeywordMenu extends MenuComponent {
             if (t != null) {
                 var r = researchsMap.find(t).secound;
                 researchView.setResearch(r);
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        scrollResearchView.getVerticalScrollBar().setValue(0);
+                    }
+                });
             }
         });
 
@@ -155,9 +164,7 @@ public class SearchByKeywordMenu extends MenuComponent {
         titlePanel.add(new JLabel("Resumen"));
         var listPanel = new JPanel(new GridLayout());
 
-        JScrollPane sp = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        listPanel.add(sp);
+        listPanel.add(scrollResearchView);
 
         c2.fill = GridBagConstraints.HORIZONTAL;
         c2.gridy = 0;
