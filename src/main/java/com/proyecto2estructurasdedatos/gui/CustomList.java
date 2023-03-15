@@ -22,7 +22,7 @@ public class CustomList extends JList<String> {
  */
 class MyCellRenderer extends DefaultListCellRenderer {
     public static final String HTML_1 = "<html><body style=' width: ";
-    public static final String HTML_2 = "px'>";
+    public static final String HTML_2 = "px; overflow-wrap: break-word'>";
     public static final String HTML_3 = "</html>";
     private int width;
 

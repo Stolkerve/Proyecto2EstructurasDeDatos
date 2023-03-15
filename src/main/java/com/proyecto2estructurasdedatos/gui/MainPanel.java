@@ -97,7 +97,7 @@ public class MainPanel extends javax.swing.JPanel {
         var c = new GridBagConstraints();
 
         var leftCol = new JPanel(new GridLayout(3, 0));
-        var centerCol = new JPanel(new GridLayout(menuBtns.size() + 1, 0, 0, 20));
+        var centerCol = new JPanel(new GridLayout(menuBtns.size() + 1, 0, 0, 10));
         var rightCol = new JPanel(new GridLayout(3, 0));
 
         var catKiss = AssetsManager.getInstance().getImage("cat-kiss");

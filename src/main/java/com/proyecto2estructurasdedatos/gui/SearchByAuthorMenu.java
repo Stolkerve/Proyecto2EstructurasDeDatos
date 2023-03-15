@@ -14,7 +14,7 @@ import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.containers.List;
 import com.proyecto2estructurasdedatos.models.Research;
 
-public class SearchByKeywordMenu extends MenuComponent {
+public class SearchByAuthorMenu extends MenuComponent {
     DefaultListModel<String> listModel;
     HashMap<String, List<Research>> keywordsMap;
     ResearchView researchView;
@@ -24,7 +24,7 @@ public class SearchByKeywordMenu extends MenuComponent {
      * @param researchsMap  HashMap con los resumenes
      * @param title         Titulo del menu
      */
-    public SearchByKeywordMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
+    public SearchByAuthorMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         super(mainMenuPanel, researchsMap, title);
         listModel = new DefaultListModel<>();
         keywordsMap = new HashMap<>();
@@ -170,4 +170,5 @@ public class SearchByKeywordMenu extends MenuComponent {
 
         return panel;
     }
+
 }
