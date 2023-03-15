@@ -16,7 +16,7 @@ import com.proyecto2estructurasdedatos.models.Research;
 
 public class SearchByAuthorMenu extends MenuComponent {
     DefaultListModel<String> listModel;
-    HashMap<String, List<Research>> keywordsMap;
+    HashMap<String, List<Research>> authorsMap;
     ResearchView researchView;
 
     /**
@@ -27,20 +27,20 @@ public class SearchByAuthorMenu extends MenuComponent {
     public SearchByAuthorMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         super(mainMenuPanel, researchsMap, title);
         listModel = new DefaultListModel<>();
-        keywordsMap = new HashMap<>();
+        authorsMap = new HashMap<>();
         researchView = new ResearchView();
 
         for (var p : researchsMap) {
             var r = p.secound;
-            for (var k : r.keywords) {
-                var researchs = keywordsMap.find(k);
+            for (var a : r.Authors) {
+                var researchs = authorsMap.find(a);
                 if (researchs != null) {
                     researchs.secound.pushBack(r);
                     continue;
                 }
                 var l = new List<Research>();
                 l.pushBack(r);
-                keywordsMap.insert(k, l);
+                authorsMap.insert(a, l);
             }
         }
 
@@ -56,13 +56,13 @@ public class SearchByAuthorMenu extends MenuComponent {
         var researchPanel = new JPanel(new GridBagLayout());
 
         var inputPanel = new JPanel(new BorderLayout());
-        var keywordInput = new JTextField();
-        keywordInput.addActionListener(e -> {
-            var keywordText = keywordInput.getText();
-            if (keywordText.length() != 0) {
+        var authorsInput = new JTextField();
+        authorsInput.addActionListener(e -> {
+            var authorText = authorsInput.getText();
+            if (authorText.length() != 0) {
                 listModel.clear();
                 researchView.setText("");
-                var p = keywordsMap.find(keywordText);
+                var p = authorsMap.find(authorText);
                 if (p != null) {
                     for (var r : p.secound) {
                         listModel.addElement(r.title);
@@ -70,14 +70,14 @@ public class SearchByAuthorMenu extends MenuComponent {
                     return;
                 }
                 JOptionPane.showMessageDialog(this,
-                        "No existe la palabra clave " + keywordText, "ERROR",
+                        "No se encontro el autor " + authorText, "ERROR",
                         JOptionPane.ERROR_MESSAGE);
             }
         });
-        var inputlabel = new JLabel("Ingrese una palabra clave");
+        var inputlabel = new JLabel("Ingrese un autor");
         inputlabel.setBorder(new EmptyBorder(0, 0, 0, 5));
         inputPanel.add(inputlabel, BorderLayout.WEST);
-        inputPanel.add(keywordInput, BorderLayout.CENTER);
+        inputPanel.add(authorsInput, BorderLayout.CENTER);
 
         c2.gridx = 0;
         c2.gridy = 1;

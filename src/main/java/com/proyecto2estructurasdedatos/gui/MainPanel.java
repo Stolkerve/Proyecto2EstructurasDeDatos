@@ -57,7 +57,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         var analyzeResearchBtn = new JButton("Analizar resumenes");
         analyzeResearchBtn.addActionListener(e -> {
-            this.addMenuComponent(new AnalyzeResearchMenu(this, researchsMap, "Analizar Resumenes"));
+            this.addMenuComponent(new AnalyzeResearchMenu(this, researchsMap, "Analizar resumenes"));
         });
 
         var searchResearchByKeywordBtn = new JButton("Buscar resumen por palabra clave");
@@ -65,8 +65,9 @@ public class MainPanel extends javax.swing.JPanel {
             this.addMenuComponent(new SearchByKeywordMenu(this, researchsMap, "Buscar resumen por palabra clave"));
         });
 
-        var searchResearchByAuthorBtn = new JButton("Buscar resumen por Autor");
+        var searchResearchByAuthorBtn = new JButton("Buscar resumen por autor");
         searchResearchByAuthorBtn.addActionListener(e -> {
+            this.addMenuComponent(new SearchByAuthorMenu(this, researchsMap, "Buscar resumen por autor"));
         });
 
         var quitBtn = new JButton("Salir");
