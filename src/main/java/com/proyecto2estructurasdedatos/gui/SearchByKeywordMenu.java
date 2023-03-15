@@ -27,7 +27,9 @@ public class SearchByKeywordMenu extends MenuComponent {
     public SearchByKeywordMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         super(mainMenuPanel, researchsMap, title);
         listModel = new DefaultListModel<>();
-        keywordsMap = new HashMap<>();
+        keywordsMap = new HashMap<>((v) -> {
+            return v.toUpperCase().hashCode();
+        });
         researchView = new ResearchView();
 
         for (var p : researchsMap) {
@@ -62,7 +64,7 @@ public class SearchByKeywordMenu extends MenuComponent {
             if (keywordText.length() != 0) {
                 listModel.clear();
                 researchView.setText("");
-                var p = keywordsMap.find(keywordText);
+                var p = keywordsMap.find(keywordText.toUpperCase());
                 if (p != null) {
                     for (var r : p.secound) {
                         listModel.addElement(r.title);

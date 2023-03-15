@@ -1,7 +1,7 @@
 package com.proyecto2estructurasdedatos.containers;
 
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.function.Function;
 /**
  * Contenedor de llave valor basado en la estructura std::unordered_map
  * de la libreria estandar de c++. Con insersion y busqueda
@@ -17,12 +17,26 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     private List<Pair<T, K>>[] buckets;
     private int size = 0;
     private float maxLoadFactor = 1.0f;
+    private Function<T, Integer> hashFunc;
 
     public HashMap() {
         pairs = new List<>();
         buckets = new List[bucketSize];
         for (int i = 0; i < buckets.length; i++)
             buckets[i] = new List<>();
+        
+        hashFunc = (v) -> {
+            return v.hashCode();
+        };
+    }
+
+    public HashMap(Function<T, Integer> hashFunc) {
+        pairs = new List<>();
+        buckets = new List[bucketSize];
+        for (int i = 0; i < buckets.length; i++)
+            buckets[i] = new List<>();
+        
+        this.hashFunc = hashFunc;
     }
 
     /**
@@ -31,6 +45,7 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
      */
     public Pair<T, K> find(T key) {
         for (var i : buckets[hash(key)]) {
+            // if (i.first.equals(key))
             if (i.first.equals(key))
                 return i;
         }
@@ -88,7 +103,7 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     }
 
     private int hash(T key) {
-        return (key.hashCode() & 0x7FFFFFFF) % bucketSize;
+        return (hashFunc.apply(key) & 0x7FFFFFFF) % bucketSize;
     }
 }
 
