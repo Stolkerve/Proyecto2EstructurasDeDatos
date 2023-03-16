@@ -1,14 +1,16 @@
 package com.proyecto2estructurasdedatos.gui;
 
+import com.google.gson.Gson;
 import com.proyecto2estructurasdedatos.MainFrame;
 import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.containers.List;
 import com.proyecto2estructurasdedatos.models.Research;
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
-import com.proyecto2estructurasdedatos.utils.LoadFileDialog;
 
 import java.awt.*;
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.function.Function;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,7 +31,18 @@ public class MainPanel extends javax.swing.JPanel {
     public MainPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
-        researchsMap = LoadFileDialog.loadFile(new File("./resumenes.txt"));
+        researchsMap = new HashMap<>((v) -> {
+            int fnvPrime = 0x811C9DC5;
+            int hash = 0;
+            for (var c : v.toLowerCase().getBytes()) {
+                hash *= fnvPrime;
+                hash ^= c;
+            }
+            return hash;
+        }, (v1, v2) -> {
+            return v1.equalsIgnoreCase(v2);
+        });
+        loadFile("./resumens.json", researchsMap);
 
         initComponents();
     }
@@ -42,17 +55,22 @@ public class MainPanel extends javax.swing.JPanel {
 
         var menuBtns = new List<JButton>();
 
-        var loadResearchBtn = new JButton("Cargar resumenes");
-        loadResearchBtn.addActionListener(e -> {
-            researchsMap = LoadFileDialog.loadFileDialog();
-            if (researchsMap != null) {
+        var loadResearchBtn = new JButton("Añadir resumenes");
+
+        Function<Boolean, Void> activateMenu = (v -> {
+            if (v) {
                 for (JButton btn : menuBtns)
                     btn.setEnabled(true);
-            } else {
+            } else { // no cargo los resumenes por defecto
                 for (JButton btn : menuBtns)
                     btn.setEnabled(false);
                 loadResearchBtn.setEnabled(true);
             }
+            return null;
+        });
+
+        loadResearchBtn.addActionListener(e -> {
+            this.addMenuComponent(new LoadResearchMenu(this, researchsMap, "Resumenes", activateMenu));
         });
 
         var analyzeResearchBtn = new JButton("Analizar resumenes");
@@ -85,14 +103,7 @@ public class MainPanel extends javax.swing.JPanel {
                 searchResearchByAuthorBtn, quitBtn
         });
 
-        if (researchsMap != null) {
-            for (JButton btn : menuBtns)
-                btn.setEnabled(true);
-        } else {
-            for (JButton btn : menuBtns)
-                btn.setEnabled(false);
-            loadResearchBtn.setEnabled(true);
-        }
+        activateMenu.apply(researchsMap.size() != 0);
 
         var colsPanel = new JPanel(new GridBagLayout());
         var c = new GridBagConstraints();
@@ -142,4 +153,25 @@ public class MainPanel extends javax.swing.JPanel {
         this.repaint();
         this.validate();
     }
+
+    /**
+     * Metodo para cargar el archivo
+     * 
+     * @param file Direccion del archivo
+     * @return HashMap con todos los resumenes
+     */
+    private void loadFile(String path, HashMap<String, Research> map) {
+        try {
+            var str = Files.readString(Path.of(path));
+            var gson = new Gson();
+            Research[] researchs = gson.fromJson(str, Research[].class);
+            for (var r : researchs) {
+                map.insert(r.title, r);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // private void activateMenu(boolean v) {
 }

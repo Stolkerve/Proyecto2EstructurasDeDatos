@@ -1,0 +1,56 @@
+[
+  {
+    "keywords": [
+      "C++",
+      "Reflection",
+      "Serializacion",
+      "Desarializacion"
+    ],
+    "title": "How to write reflection for C++",
+    "body": "C++ is a truly controversial language. Good ol' C was created in 1972. C++ appeared in 1985 and had backward compatibility with C. Since then, C++ was pronounced dead many times: Java did it first, then Go and Rust. All disadvantages of C++ were discussed many times.",
+    "authors": [
+      "Sergey Larin"
+    ]
+  },
+  {
+    "keywords": [
+      "análisis de dominio",
+      "ingeniería de dominio",
+      "PHP arquitectura referencial",
+      "internacionalización y localización"
+    ],
+    "title": "Arquitectura referencial para mecanismos de Internacionalización y localización en PHP.",
+    "body": "Los procesos de internacionalización y localización inciden directamente en la usabilidad de un sistema web alfacilitar su adaptación a diferentes elementos culturales tales como la moneda, idioma, formato de fecha, sistemade medidas, entre otros. Algunos frameworks para aplicaciones web cuentan con soporte para dichos procesos.Sin embargo, en muchas ocasiones, la información sobre la arquitectura de los mecanismos utilizados en cadaframework, así como su funcionamiento interno resulta insuficiente. La arquitectura de software se correspondea visión abstracta de un sistema en la que se representan los componentes del mismo, el comportamiento de cadauno de dichos elementos y la forma en que se relacionan. Su uso adecuado conlleva a la disminución de loscostos de manutención del software, mayor facilidad en la toma de decisiones de diseño, disminución de lasfallas, entre otras ventajas. Por otra parte, la generación de una Arquitectura de Referencia (AR), es el productocon mayor relevancia generado en la etapa de Análisis del Dominio (AD), dentro de la denominada disciplina deIngeniería del Dominio (ID), la cual tiene gran relevancia para el desarrollo de software basado en componentes.En este trabajo, se aplica un AD, asumiendo un enfoque ascendente (\u201cbottom-up\u201d) sobre una muestra deframeworks de desarrollo para PHP, específicamente centrado en los mecanismos que cada frameworkimplementa para posibilitar la internacionalización y la localización en aplicaciones web. Para lograr lo anterior,se aplicó ingeniería inversa sobre las distintas arquitecturas y se modelaron en UML. Del análisis de las variantese invariantes de las mismas, se obtuvo una Arquitectura de Referencia para un subsistema deinternacionalización y localización. Si bien la muestra de arquitecturas analizadas en este trabajo secircunscriben a frameworks de desarrollo en PHP, la Arquitectura de Referencia obtenida puede ser consideradade carácter genérico, con el suficiente nivel de abstracción de manera que pueda ser asumida como unaarquitectura base sobre la cual comenzar un desarrollo basado en componentes; sin embargo, su validación puederealizarse a través de la ampliación de la muestra inicial de frameworks seleccionados y el análisis de lasposibles variantes que puedan generarse. No obstante, la Arquitectura de Referencia obtenida en este ejercicio deAnálisis de Dominio puede utilizarse como referente dentro de una organización para evaluar la mejor opción almomento de seleccionar la alternativa arquitectónica más robusta al considerar un conjunto de frameworks dedesarrollo.",
+    "authors": [
+      "Christian Guillén Drija",
+      "Andrea Pérez",
+      "Carlos Maldonado"
+    ]
+  },
+  {
+    "keywords": [
+      "C++",
+      "Recursividad",
+      "Templates"
+    ],
+    "title": "Fold Expressions in C++",
+    "body": "Fold expressions is a new feature in C++ 17. This feature is related to variadic arguments of templates. Fold expressions enables the C++17 compiler to apply same binary operation to all the arguments of parameter pack. The compiler first applies the binary operation to first set of 2 arguments. After this it applies the result to third argument and so on. For instance, If (T . . . args) is the variadic argument of a template function, then the fold expression may look like as follows:",
+    "authors": [
+      "Vaibhav"
+    ]
+  },
+  {
+    "keywords": [
+      "Tcp",
+      "Conecciones",
+      "Codificacion",
+      "Decodificacion",
+      "Bytes"
+    ],
+    "title": "Cómo leer bytes de una coneccion tcp sin morir en el intento",
+    "body": "Resulta ser que existe un protocolo de comunicación llamado tcp y nuestros sistemas operativos se encargan completamente de eso y nos deja una interfaz para abrir puertos, esperar comunicaciones, leer bytes y escribir bytes. Muy fácil ¿no? Bueno, abrir el puerto, esperar por conexiones y escribir bytes es muy fácil, no obstante, leer bytes es complicado. La razón es por que siempre estamos recibiendo un número de bytes desconocido, porque al fin y a cabo enviar datos lleva tiempo y nunca podemos esperar que cumplan ciertas reglas que tengamos en la lectura de bytes. La solución es crear un esquema de header y data en nuestros paquetes. En la sección de header en nuestro paquete estamos codificando un número entero sin signo de 32 o 64 bits como el tamaño en bytes de data (32 bits nos permite un tamaño máximo de data por paquete de 4.29 gigabytes y 64 bits 18446 petabytes como máximo). De esta manera ya podemos saber el tamaño de datos que nos envían, un ejemplo en código de rust sería así. En cuanto de la robustez de nuestro esquema, resulta ser muy buena por que aunque leamos datos no codificados con nuestro esquema, el decodificador del header no le importa, pero cuando decodificamos la data nos tirara un error por que está recibiendo basura que no entiende.",
+    "authors": [
+      "Sebastian Gonzalez Rada (Yo)"
+    ]
+  }
+]

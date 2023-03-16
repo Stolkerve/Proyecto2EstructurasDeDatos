@@ -1,8 +1,5 @@
 package com.proyecto2estructurasdedatos.gui;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.swing.JTextPane;
 
 import com.proyecto2estructurasdedatos.models.Research;
@@ -18,8 +15,8 @@ public class ResearchView extends JTextPane {
                 r.title);
         int i = 0;
         var authors = "";
-        for (var a : r.Authors) {
-            if (i == r.Authors.size() - 1) {
+        for (var a : r.authors) {
+            if (i == r.authors.length - 1) {
                 authors += a + ".";
                 break;
             }

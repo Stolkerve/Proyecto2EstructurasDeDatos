@@ -81,8 +81,8 @@ public class AnalyzeResearchMenu extends MenuComponent {
                     research.secound.title);
             int i = 0;
             var authors = "";
-            for (var a : research.secound.Authors) {
-                if (i == research.secound.Authors.size() - 1) {
+            for (var a : research.secound.authors) {
+                if (i == research.secound.authors.length - 1) {
                     authors += a + ".";
                     break;
                 }

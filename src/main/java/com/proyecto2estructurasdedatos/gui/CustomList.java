@@ -31,7 +31,7 @@ class MyCellRenderer extends DefaultListCellRenderer {
     }
 
     @Override
-    public JLabel getListCellRendererComponent(JList list, Object value,
+    public JLabel getListCellRendererComponent(JList<?> list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
         String text = HTML_1 + String.valueOf(width) + HTML_2 + value.toString()
                 + HTML_3;

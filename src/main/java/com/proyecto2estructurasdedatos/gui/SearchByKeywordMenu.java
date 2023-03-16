@@ -32,8 +32,7 @@ public class SearchByKeywordMenu extends MenuComponent {
         keywordsMap = new HashMap<>((v) -> {
             int fnvPrime = 0x811C9DC5;
             int hash = 0;
-            var v2 = v.toLowerCase();
-            for (var c : v2.getBytes()) {
+            for (var c : v.toLowerCase().getBytes()) {
                 hash *= fnvPrime;
                 hash ^= c;
             }

@@ -1,6 +1,5 @@
 package com.proyecto2estructurasdedatos.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;

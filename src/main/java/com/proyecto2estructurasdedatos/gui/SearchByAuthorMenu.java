@@ -37,7 +37,7 @@ public class SearchByAuthorMenu extends MenuComponent {
 
         for (var p : researchsMap) {
             var r = p.secound;
-            for (var a : r.Authors) {
+            for (var a : r.authors) {
                 authorsList.pushBack(new Pair<>(a, r));
             }
         }
