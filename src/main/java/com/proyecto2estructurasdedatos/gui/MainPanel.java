@@ -42,7 +42,7 @@ public class MainPanel extends javax.swing.JPanel {
         }, (v1, v2) -> {
             return v1.equalsIgnoreCase(v2);
         });
-        loadFile("./resumens.json", researchsMap);
+        loadFile("./resumenes.json", researchsMap);
 
         initComponents();
     }
