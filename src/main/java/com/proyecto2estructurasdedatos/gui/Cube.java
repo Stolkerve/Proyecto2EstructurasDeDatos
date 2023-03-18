@@ -12,8 +12,8 @@ import javax.swing.Timer;
  * @author sebas
  */
 class CubeCanvas extends JPanel {
-	int width = 800;
-	int height = 600;
+	int width = 960;
+	int height = 720;
 	CubeCanvas() {
 		this.setSize(width, height);
 		this.setPreferredSize(new Dimension(width, height));
@@ -42,8 +42,7 @@ public class Cube {
 				game.repaint();
 			}
 		};
-		var timer = new Timer(50, al);// create the timer which calls the actionperformed method for every 1000
-										// millisecond(1 second=1000 millisecond)
+		var timer = new Timer(50, al);
 		timer.setRepeats(true);
 		timer.start();
 

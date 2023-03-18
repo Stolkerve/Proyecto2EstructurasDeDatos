@@ -195,6 +195,7 @@ public class MainPanel extends javax.swing.JPanel {
     private void saveState() {
         String msg = "Nombre del archivo de los resumenes cargados";
         String name = JOptionPane.showInputDialog(null, msg, "Guardar el estado", JOptionPane.DEFAULT_OPTION);
+        if (name == null) return;
         while (name.length() == 0)
             name = JOptionPane.showInputDialog(null, msg);
 
