@@ -60,5 +60,30 @@
       "mecanismo arquitectónico",
       "calidad de software"
     ]
+  },
+  {
+    "title": "How to write reflection for C++",
+    "body": "C++ is a truly controversial language. Good ol\u0027 C was created in 1972. C++ appeared in 1985 and had backward compatibility with C. Since then, C++ was pronounced dead many times: Java did it first, then Go and Rust. All disadvantages of C++ were discussed many times.",
+    "authors": [
+      "Sergey Larin"
+    ],
+    "keywords": [
+      "C++",
+      "Reflection",
+      "Serializacion",
+      "Desarializacion"
+    ]
+  },
+  {
+    "title": "Fold Expressions in C++",
+    "body": "Fold expressions is a new feature in C++ 17. This feature is related to variadic arguments of templates. Fold expressions enables the C++17 compiler to apply same binary operation to all the arguments of parameter pack. The compiler first applies the binary operation to first set of 2 arguments. After this it applies the result to third argument and so on. For instance, If (T . . . args) is the variadic argument of a template function, then the fold expression may look like as follows:",
+    "authors": [
+      "Vaibhav"
+    ],
+    "keywords": [
+      "C++",
+      "Recursividad",
+      "Templates"
+    ]
   }
 ]

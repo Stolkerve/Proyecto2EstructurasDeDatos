@@ -1,6 +1,8 @@
 package com.proyecto2estructurasdedatos.gui;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.proyecto2estructurasdedatos.MainFrame;
 import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.containers.List;
@@ -8,13 +10,21 @@ import com.proyecto2estructurasdedatos.models.Research;
 import com.proyecto2estructurasdedatos.utils.AssetsManager;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.function.Function;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * @author sebas
@@ -43,6 +53,13 @@ public class MainPanel extends javax.swing.JPanel {
             return v1.equalsIgnoreCase(v2);
         });
         loadFile("./resumenes.json", researchsMap);
+
+        this.mainFrame.addWindowListener(new WindowAdapter() {
+           @Override 
+           public void windowClosing(WindowEvent windowEvent) {
+            saveState();
+           }
+        });
 
         initComponents();
     }
@@ -90,10 +107,12 @@ public class MainPanel extends javax.swing.JPanel {
 
         var quitBtn = new JButton("Salir");
         quitBtn.addActionListener(e -> {
+            saveState();
             this.mainFrame.dispose();
+            System.exit(0);
         });
 
-        var helpBtn = new JButton("Super C U B O");
+        var helpBtn = new JButton("C U B O");
         helpBtn.addActionListener(e -> {
             new Cube();
         });
@@ -173,5 +192,36 @@ public class MainPanel extends javax.swing.JPanel {
         }
     }
 
-    // private void activateMenu(boolean v) {
+    private void saveState() {
+        String msg = "Nombre del archivo de los resumenes cargados";
+        String name = JOptionPane.showInputDialog(null, msg, "Guardar el estado", JOptionPane.DEFAULT_OPTION);
+        while (name.length() == 0)
+            name = JOptionPane.showInputDialog(null, msg);
+
+        JFileChooser fileDialog = new JFileChooser("./", FileSystemView.getFileSystemView());
+        fileDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int res = fileDialog.showOpenDialog(null);
+        if (res != JFileChooser.CANCEL_OPTION) {
+            File outputFile = new File(name + ".json");
+            if (outputFile.exists()) {
+                int r = JOptionPane.showConfirmDialog(fileDialog, "El archivo ya existe, deseas sobre escribirlo?", "ERROR", JOptionPane.WARNING_MESSAGE);
+                if (r != JOptionPane.OK_OPTION)
+                    return;
+            }
+            try (FileWriter output = new FileWriter(outputFile)) {
+                var jsonArr = new JsonArray();
+                var gson = new GsonBuilder()
+                        .setPrettyPrinting()
+                        .create();
+                for (var p : researchsMap) {
+                    var research = p.secound;
+                    jsonArr.add(gson.toJsonTree(research));
+                }
+                output.write(gson.toJson(jsonArr));
+                output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

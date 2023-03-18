@@ -68,21 +68,27 @@ public class LoadResearchMenu extends MenuComponent {
             var btn = new JButton("Añadir resumenes");
             btn.addActionListener(e -> {
                 var indices = list.getSelectedIndices();
+                var counter = 0;
+                var names = "";
                 if (indices.length != 0) {
                     for (var i : indices) {
                         var r = researchs[i];
                         if (researchsMap.find(r.title) == null) {
                             researchsMap.insert(r.title, r);
+                            names += r.title + '\n';
                             continue;
                         }
                         JOptionPane.showMessageDialog(this,
                                 "Ya existe el resumen " + r.title, "ERROR",
                                 JOptionPane.ERROR_MESSAGE);
+                        counter++;
                     }
 
-                    JOptionPane.showMessageDialog(null,
-                            "Se Añadieron los resumenes exitosamente", "Todo bien",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    // Se cargo un resumen por lo menos
+                    if (counter != indices.length)
+                        JOptionPane.showMessageDialog(null,
+                                "Se Añadieron los resumenes exitosamente\n" + names, "Todo bien",
+                                JOptionPane.INFORMATION_MESSAGE);
                     activateMenuFunc.apply(true);
                     backToMainMenu();
                 }
