@@ -39,10 +39,11 @@ public class LoadResearchMenu extends MenuComponent {
         fileDialog.setAcceptAllFileFilterUsed(false);
         fileDialog.setDialogTitle("Selectciona el archivo");
         fileDialog.addChoosableFileFilter(new FileNameExtensionFilter("Solo archivos .json", "json"));
-        fileDialog.showOpenDialog(null);
-
-        researchFile = fileDialog.getSelectedFile();
-        initComponents();
+        var res = fileDialog.showOpenDialog(null);
+        if (res != JFileChooser.CANCEL_OPTION) {
+            researchFile = fileDialog.getSelectedFile();
+            initComponents();
+        }
     }
 
     private void initComponents() {

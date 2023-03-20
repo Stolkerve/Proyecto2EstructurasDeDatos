@@ -112,11 +112,6 @@ public class MainPanel extends javax.swing.JPanel {
             System.exit(0);
         });
 
-        var helpBtn = new JButton("C U B O");
-        helpBtn.addActionListener(e -> {
-            new Cube();
-        });
-
         menuBtns.pushBack(new JButton[] {
                 loadResearchBtn, analyzeResearchBtn, searchResearchByKeywordBtn,
                 searchResearchByAuthorBtn, quitBtn
@@ -148,7 +143,6 @@ public class MainPanel extends javax.swing.JPanel {
 
         for (var btn : menuBtns)
             centerCol.add(btn);
-        centerCol.add(helpBtn);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -196,8 +190,10 @@ public class MainPanel extends javax.swing.JPanel {
         String msg = "Nombre del archivo de los resumenes cargados";
         String name = JOptionPane.showInputDialog(null, msg, "Guardar el estado", JOptionPane.DEFAULT_OPTION);
         if (name == null) return;
-        while (name.length() == 0)
+        while (name.length() == 0) {
             name = JOptionPane.showInputDialog(null, msg);
+            if (name == null) return;
+        }
 
         JFileChooser fileDialog = new JFileChooser("./", FileSystemView.getFileSystemView());
         fileDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
