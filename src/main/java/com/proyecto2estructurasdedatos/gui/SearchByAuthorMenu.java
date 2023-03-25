@@ -16,6 +16,9 @@ import com.proyecto2estructurasdedatos.containers.List;
 import com.proyecto2estructurasdedatos.containers.Pair;
 import com.proyecto2estructurasdedatos.models.Research;
 
+/**
+ * @author sebas
+ */
 public class SearchByAuthorMenu extends MenuComponent {
     DefaultListModel<String> listModel;
     List<Pair<String, Research>> authorsList;

@@ -8,6 +8,9 @@ import javax.swing.JList;
 
 import java.awt.Color;
 
+/**
+ * @author sebas
+ */
 public class CustomList extends JList<String> {
 
     public CustomList(DefaultListModel<String> dataModel, int size) {

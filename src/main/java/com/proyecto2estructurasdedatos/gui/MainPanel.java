@@ -52,7 +52,7 @@ public class MainPanel extends javax.swing.JPanel {
         }, (v1, v2) -> {
             return v1.equalsIgnoreCase(v2);
         });
-        loadFile("./resumenes.json", researchsMap);
+        loadFile("./src/main/java/com/proyecto2estructurasdedatos/assets/resumenes.json", researchsMap);
 
         this.mainFrame.addWindowListener(new WindowAdapter() {
            @Override 
@@ -182,11 +182,12 @@ public class MainPanel extends javax.swing.JPanel {
                 map.insert(r.title, r);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
     private void saveState() {
+        if (researchsMap.size() == 0) return;
         String msg = "Nombre del archivo de los resumenes cargados";
         String name = JOptionPane.showInputDialog(null, msg, "Guardar el estado", JOptionPane.DEFAULT_OPTION);
         if (name == null) return;

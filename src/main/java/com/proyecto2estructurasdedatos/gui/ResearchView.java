@@ -4,6 +4,9 @@ import javax.swing.JTextPane;
 
 import com.proyecto2estructurasdedatos.models.Research;
 
+/**
+ *@author sebas
+ */
 public class ResearchView extends JTextPane {
     public ResearchView() {
         this.setContentType("text/html");

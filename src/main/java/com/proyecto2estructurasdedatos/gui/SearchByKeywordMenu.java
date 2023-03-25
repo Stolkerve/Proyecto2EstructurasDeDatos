@@ -15,6 +15,9 @@ import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.containers.List;
 import com.proyecto2estructurasdedatos.models.Research;
 
+/**
+ * @author sebas
+ */
 public class SearchByKeywordMenu extends MenuComponent {
     DefaultListModel<String> listModel;
     HashMap<String, List<Research>> keywordsMap;

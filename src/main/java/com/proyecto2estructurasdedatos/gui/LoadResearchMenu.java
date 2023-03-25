@@ -23,6 +23,9 @@ import com.google.gson.Gson;
 import com.proyecto2estructurasdedatos.containers.HashMap;
 import com.proyecto2estructurasdedatos.models.Research;
 
+/**
+ * @author sebas
+ */
 public class LoadResearchMenu extends MenuComponent {
     Function<Boolean, Void> activateMenuFunc;
     File researchFile;
@@ -35,7 +38,7 @@ public class LoadResearchMenu extends MenuComponent {
         this.activateMenuFunc = activateMenuFunc;
         failParse = false;
 
-        JFileChooser fileDialog = new JFileChooser("./", FileSystemView.getFileSystemView());
+        JFileChooser fileDialog = new JFileChooser("./src/main/java/com/proyecto2estructurasdedatos/assets/", FileSystemView.getFileSystemView());
         fileDialog.setAcceptAllFileFilterUsed(false);
         fileDialog.setDialogTitle("Selectciona el archivo");
         fileDialog.addChoosableFileFilter(new FileNameExtensionFilter("Solo archivos .json", "json"));
