@@ -117,7 +117,7 @@ public class LoadResearchMenu extends MenuComponent {
             c.weightx = 1.0;
             c.weighty = 0.0;
             panel.add(new JLabel(
-                    "<html><span style='font-size:12px; color: white'>*Para seleccionar multiples resumenes, manten precionado Ctrl.            :O</span></html>"),
+                    "<html><pre style='font-size:12px; color: white'>*Para seleccionar multiples resumenes, manten precionado Ctrl   ᕕ( ͡° ͜ʖ ͡° )ᕗ   ☀(▀U ▀-͠)</pre></html>"),
                     c);
 
             this.add(panel);
