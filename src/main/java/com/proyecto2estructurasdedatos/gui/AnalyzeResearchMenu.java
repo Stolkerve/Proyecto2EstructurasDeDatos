@@ -63,11 +63,10 @@ public class AnalyzeResearchMenu extends MenuComponent {
 
         {
             var titles = new String[researchsMap.size()];
-            int i = 0;
-            for (var pair : researchsMap) {
+            researchsMap.forEach((pair, i) -> {
                 titles[i] = pair.first;
-                i++;
-            }
+                return null;
+            });
             Arrays.sort(titles);
             for (var t : titles)
                 listModel.addElement(t);

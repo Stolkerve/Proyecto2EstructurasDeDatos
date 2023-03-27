@@ -76,11 +76,15 @@ public class MainPanel extends javax.swing.JPanel {
 
         Function<Boolean, Void> activateMenu = (v -> {
             if (v) {
-                for (JButton btn : menuBtns)
+                menuBtns.forEach(btn -> {
                     btn.setEnabled(true);
+                    return null;
+                });
             } else { // no cargo los resumenes por defecto
-                for (JButton btn : menuBtns)
+                menuBtns.forEach(btn -> {
                     btn.setEnabled(false);
+                    return null;
+                });
                 loadResearchBtn.setEnabled(true);
             }
             return null;
@@ -141,8 +145,10 @@ public class MainPanel extends javax.swing.JPanel {
             }
         }
 
-        for (var btn : menuBtns)
+        menuBtns.forEach(btn -> {
             centerCol.add(btn);
+            return null;
+        });
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -211,10 +217,11 @@ public class MainPanel extends javax.swing.JPanel {
                 var gson = new GsonBuilder()
                         .setPrettyPrinting()
                         .create();
-                for (var p : researchsMap) {
+                researchsMap.forEach((p, i) -> {
                     var research = p.secound;
                     jsonArr.add(gson.toJsonTree(research));
-                }
+                    return null;
+                });
                 output.write(gson.toJson(jsonArr));
                 output.close();
             } catch (IOException e) {

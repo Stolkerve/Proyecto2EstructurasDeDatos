@@ -47,7 +47,7 @@ public class SearchByKeywordMenu extends MenuComponent {
         scrollResearchView = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        for (var p : researchsMap) {
+        researchsMap.forEach((p, i) -> {
             var r = p.secound;
             for (var k : r.keywords) {
                 var researchs = keywordsMap.find(k);
@@ -59,7 +59,8 @@ public class SearchByKeywordMenu extends MenuComponent {
                 l.pushBack(r);
                 keywordsMap.insert(k, l);
             }
-        }
+            return null;
+        });
 
         initMenuComponents();
     }
@@ -81,9 +82,10 @@ public class SearchByKeywordMenu extends MenuComponent {
                 researchView.setText("<span></span>");
                 var p = keywordsMap.find(keywordText);
                 if (p != null) {
-                    for (var r : p.secound) {
+                    p.secound.forEach(r -> {
                         listModel.addElement(r.title);
-                    }
+                        return null;
+                    });
                     return;
                 }
                 JOptionPane.showMessageDialog(this,

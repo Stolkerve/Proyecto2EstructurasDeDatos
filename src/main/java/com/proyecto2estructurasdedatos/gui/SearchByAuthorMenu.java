@@ -38,12 +38,12 @@ public class SearchByAuthorMenu extends MenuComponent {
         scrollResearchView = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        for (var p : researchsMap) {
+        researchsMap.forEach((p, i) -> {
             var r = p.secound;
-            for (var a : r.authors) {
+            for (var a : r.authors)
                 authorsList.pushBack(new Pair<>(a, r));
-            }
-        }
+            return null;
+        });
 
         initMenuComponents();
     }
@@ -63,11 +63,11 @@ public class SearchByAuthorMenu extends MenuComponent {
             if (authorText.length() != 0) {
                 listModel.clear();
                 researchView.setText("<span></span>");
-                for (var p : authorsList) {
-                    if (p.first.matches(String.format("(?i).*\\b%s\\b.*", authorText))) {
+                authorsList.forEach(p -> {
+                    if (p.first.matches(String.format("(?i).*\\b%s\\b.*", authorText)))
                         listModel.addElement(p.secound.title);
-                    }
-                }
+                    return null;
+                });
                 if (listModel.size() != 0)
                     return;
                 JOptionPane.showMessageDialog(this,

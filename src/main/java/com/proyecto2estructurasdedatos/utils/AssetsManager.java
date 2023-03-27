@@ -44,10 +44,10 @@ public class AssetsManager {
      * @return Retorna el recurso se si encontro, de lo contrario Null
      */
     public ImageAsset getImage(String name) {
-        for (var a : this.imageAssets) {
+        return this.imageAssets.forEach(a -> {
             if (a.name.equals(name))
                 return a;
-        }
-        return null;
+            return null;
+        });
     }
 }

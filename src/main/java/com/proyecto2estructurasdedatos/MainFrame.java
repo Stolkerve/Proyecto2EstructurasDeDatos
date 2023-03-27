@@ -1,7 +1,5 @@
 package com.proyecto2estructurasdedatos;
 
-import java.util.Enumeration;
-
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIDefaults;
@@ -58,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
             UIDefaults defaults = UIManager.getLookAndFeelDefaults();
             // UIDefaults defaults = UIManager.getLookAndFeelDefaults();
-            Enumeration<Object> keys = defaults.keys();
+            var keys = defaults.keys();
             while (keys.hasMoreElements()) {
                 Object key = keys.nextElement();
                 if ((key instanceof String) && (((String) key).endsWith(".font"))) {

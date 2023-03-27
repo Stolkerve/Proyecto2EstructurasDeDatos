@@ -1,6 +1,5 @@
 package com.proyecto2estructurasdedatos.containers;
 
-import java.util.Iterator;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -13,7 +12,7 @@ import java.util.function.Function;
  * @param <T> Key type
  * @param <K> Value type
  */
-public class HashMap<T, K> implements Iterable<Pair<T, K>> {
+public class HashMap<T, K> {
     private List<Pair<T, K>> pairs;
     private int bucketSize = 50;
     private List<Pair<T, K>>[] buckets;
@@ -51,11 +50,11 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
      * @return Retorna el valor relacionado a la llave. Null si no existe
      */
     public Pair<T, K> find(T key) {
-        for (var i : buckets[hash(key)]) {
+        return buckets[hash(key)].forEach(i -> {
             if (cmpFunc.apply(i.first, key))
                 return i;
-        }
-        return null;
+            return null;
+        });
     }
 
     /**
@@ -89,8 +88,17 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
     /**
      * @return Iterador de HashMap
      */
-    public Iterator<Pair<T, K>> iterator() {
-        return new HashMapIterator<T, K>(pairs);
+    public Pair<T, K> forEach(BiFunction<Pair<T, K>, Integer, Pair<T, K>> callback) {
+        int i = 0;
+        Node<Pair<T,K>> current = pairs.begin;
+        while(current != null) {
+            var data = current.val;
+            current = current.child;
+            var ret = callback.apply(data, i);
+            if (ret != null) return ret;
+            i++;
+        }
+        return null;
     }
 
     private void rehash() {
@@ -102,9 +110,10 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
         for (int i = 0; i < newBuckets.length; i++)
             newBuckets[i] = new List<>();
         for (int i = 0; i < bucketSize / 2; i++) {
-            for (var pair : buckets[i]) {
+            buckets[i].forEach(pair -> {
                 newBuckets[hash(pair.first)].pushBack(pair);
-            }
+                return null;
+            });
         }
         buckets = newBuckets;
     }
@@ -121,22 +130,22 @@ public class HashMap<T, K> implements Iterable<Pair<T, K>> {
  * @param <T> key type
  * @param <K> value type
  */
-class HashMapIterator<T, K> implements Iterator<Pair<T, K>> {
-    Node<Pair<T, K>> current;
+// class HashMapIterator<T, K> implements Iterator<Pair<T, K>> {
+//     Node<Pair<T, K>> current;
 
-    HashMapIterator(List<Pair<T, K>> list) {
-        current = list.begin;
-    }
+//     HashMapIterator(List<Pair<T, K>> list) {
+//         current = list.begin;
+//     }
 
-    @Override
-    public boolean hasNext() {
-        return current != null;
-    }
+//     @Override
+//     public boolean hasNext() {
+//         return current != null;
+//     }
 
-    @Override
-    public Pair<T, K> next() {
-        var data = current.val;
-        this.current = this.current.child;
-        return data;
-    }
-}
+//     @Override
+//     public Pair<T, K> next() {
+//         var data = current.val;
+//         this.current = this.current.child;
+//         return data;
+//     }
+// }

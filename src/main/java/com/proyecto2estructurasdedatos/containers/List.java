@@ -1,13 +1,13 @@
 package com.proyecto2estructurasdedatos.containers;
 
-import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * Contenedor de un elementos enlazados
  * 
  * @author sebas
  */
-public class List<T> implements Iterable<T> {
+public class List<T> {
     private int size;
     Node<T> begin;
     Node<T> end;
@@ -21,8 +21,15 @@ public class List<T> implements Iterable<T> {
     /**
      * @return Iterador de HashMap
      */
-    public Iterator<T> iterator() {
-        return new ListIterator<T>(this);
+    public T forEach(Function<T, T> callback) {
+        Node<T> current = this.begin;
+        while(current != null) {
+            T data = current.val;
+            current = current.child;
+            T ret = callback.apply(data);
+            if (ret != null) return ret;
+        }
+        return null;
     }
 
     public int size() {
@@ -58,29 +65,5 @@ public class List<T> implements Iterable<T> {
             return true;
         }
         return false;
-    }
-}
-
-/**
- * Implementacion de iterador para la clase List
- * @param <T> type
- */
-class ListIterator<T> implements Iterator<T> {
-    Node<T> current;
-
-    ListIterator(List<T> list) {
-        current = list.begin;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return current != null;
-    }
-
-    @Override
-    public T next() {
-        T data = current.val;
-        this.current = this.current.child;
-        return data;
     }
 }
