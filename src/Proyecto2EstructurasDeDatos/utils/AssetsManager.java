@@ -1,6 +1,6 @@
-package com.proyecto2estructurasdedatos.utils;
+package Proyecto2EstructurasDeDatos.utils;
 
-import com.proyecto2estructurasdedatos.containers.List;
+import Proyecto2EstructurasDeDatos.containers.List;
 
 /**
  * Singleton que contiene todos los recursos usados por el programa

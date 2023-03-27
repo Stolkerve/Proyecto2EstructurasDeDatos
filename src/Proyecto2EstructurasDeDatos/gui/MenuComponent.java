@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
 import java.awt.Dimension;
 
@@ -9,9 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.proyecto2estructurasdedatos.containers.HashMap;
-import com.proyecto2estructurasdedatos.models.Research;
-import com.proyecto2estructurasdedatos.utils.AssetsManager;
+import Proyecto2EstructurasDeDatos.containers.HashMap;
+import Proyecto2EstructurasDeDatos.models.Research;
+import Proyecto2EstructurasDeDatos.utils.AssetsManager;
 
 /**
  * @author sebas

@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;

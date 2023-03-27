@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -11,9 +11,9 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 
-import com.proyecto2estructurasdedatos.containers.HashMap;
-import com.proyecto2estructurasdedatos.containers.List;
-import com.proyecto2estructurasdedatos.models.Research;
+import Proyecto2EstructurasDeDatos.containers.HashMap;
+import Proyecto2EstructurasDeDatos.containers.List;
+import Proyecto2EstructurasDeDatos.models.Research;
 
 /**
  * @author sebas

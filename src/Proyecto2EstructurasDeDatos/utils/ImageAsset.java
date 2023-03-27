@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.utils;
+package Proyecto2EstructurasDeDatos.utils;
 
 import javax.swing.*;
 

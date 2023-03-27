@@ -1,6 +1,6 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
-import com.proyecto2estructurasdedatos.utils.AssetsManager;
+import Proyecto2EstructurasDeDatos.utils.AssetsManager;
 
 import javax.swing.*;
 import java.awt.*;

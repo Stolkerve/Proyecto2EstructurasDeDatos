@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.models;
+package Proyecto2EstructurasDeDatos.models;
 
 /**
  * Clase resumen

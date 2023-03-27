@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -19,8 +19,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-import com.proyecto2estructurasdedatos.containers.HashMap;
-import com.proyecto2estructurasdedatos.models.Research;
+import Proyecto2EstructurasDeDatos.containers.HashMap;
+import Proyecto2EstructurasDeDatos.models.Research;
 
 /**
  * @author sebas

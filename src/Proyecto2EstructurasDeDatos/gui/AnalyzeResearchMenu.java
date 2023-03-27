@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import com.proyecto2estructurasdedatos.containers.HashMap;
-import com.proyecto2estructurasdedatos.models.Research;
+import Proyecto2EstructurasDeDatos.containers.HashMap;
+import Proyecto2EstructurasDeDatos.models.Research;
 
 /**
  * @author Sebas

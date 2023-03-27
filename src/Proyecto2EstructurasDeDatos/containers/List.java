@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos.containers;
+package Proyecto2EstructurasDeDatos.containers;
 
 import java.util.function.Function;
 

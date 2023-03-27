@@ -1,13 +1,13 @@
-package com.proyecto2estructurasdedatos.gui;
+package Proyecto2EstructurasDeDatos.gui;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.proyecto2estructurasdedatos.MainFrame;
-import com.proyecto2estructurasdedatos.containers.HashMap;
-import com.proyecto2estructurasdedatos.containers.List;
-import com.proyecto2estructurasdedatos.models.Research;
-import com.proyecto2estructurasdedatos.utils.AssetsManager;
+import Proyecto2EstructurasDeDatos.MainFrame;
+import Proyecto2EstructurasDeDatos.containers.HashMap;
+import Proyecto2EstructurasDeDatos.containers.List;
+import Proyecto2EstructurasDeDatos.models.Research;
+import Proyecto2EstructurasDeDatos.utils.AssetsManager;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;

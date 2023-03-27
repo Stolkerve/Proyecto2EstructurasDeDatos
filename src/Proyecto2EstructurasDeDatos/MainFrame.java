@@ -6,9 +6,9 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.proyecto2estructurasdedatos.gui.AssetsLoader;
-import com.proyecto2estructurasdedatos.gui.MainPanel;
-import com.proyecto2estructurasdedatos.utils.AssetsManager;
+import Proyecto2EstructurasDeDatos.gui.AssetsLoader;
+import Proyecto2EstructurasDeDatos.gui.MainPanel;
+import Proyecto2EstructurasDeDatos.utils.AssetsManager;
 
 /**
  *
