@@ -1,11 +1,11 @@
 package Proyecto2EstructurasDeDatos.gui;
 
-import javax.swing.JTextPane;
-
 import Proyecto2EstructurasDeDatos.models.Research;
 
+import javax.swing.*;
+
 /**
- *@author sebas
+ * @author sebas
  */
 public class ResearchView extends JTextPane {
     public ResearchView() {
@@ -16,28 +16,34 @@ public class ResearchView extends JTextPane {
         var titleText = String.format(
                 "<h3 style=\"text-align: center\">%s</h3>",
                 r.title);
-        int i = 0;
-        var authors = "";
-        for (var a : r.authors) {
-            if (i == r.authors.length - 1) {
-                authors += a + ".";
-                break;
+        var ref = new Object() {
+            int i = 0;
+            String authors = "";
+        };
+        r.authors.forEach(a -> {
+            if (ref.i == r.authors.size() - 1) {
+                ref.authors += a + ".";
+                return ref.authors;
             }
-            authors += a + ", ";
-            i++;
-        }
+            ref.authors += a + ", ";
+            ref.i++;
+            return null;
+        });
         var authorsText = String.format(
-                "<p><b>Autores</b>: %s</p>", authors);
+                "<p><b>Autores</b>: %s</p>", ref.authors);
 
         var bodyText = String.format("<p><b>Resumen</b></p><p>%s</p>", r.body);
 
-        var keywordsText = "<p><b>Palabras claves</b></p><ul style=\"margin-left: 10px; list-style-position: inside\">";
-        for (var k : r.keywords) {
-            keywordsText += String.format("<li><b>%s</b></li>", k);
-        }
-        keywordsText += "</ul>";
+        var ref1 = new Object() {
+            String keywordsText = "<p><b>Palabras claves</b></p><ul style=\"margin-left: 10px; list-style-position: inside\">";
+        };
+        r.keywords.forEach(k -> {
+            ref1.keywordsText += String.format("<li><b>%s</b></li>", k);
+            return null;
+        });
+        ref1.keywordsText += "</ul>";
 
-        setText(titleText + authorsText + bodyText + keywordsText);
+        setText(titleText + authorsText + bodyText + ref1.keywordsText);
     }
 
 }

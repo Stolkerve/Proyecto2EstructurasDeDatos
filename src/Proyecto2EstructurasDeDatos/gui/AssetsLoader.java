@@ -4,6 +4,7 @@ import Proyecto2EstructurasDeDatos.utils.AssetsManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Paths;
 
 /**
  * @author sebas
@@ -29,7 +30,7 @@ class AssetInfo {
 
 /**
  * Clase que carga los distintos recursos usados por el programa
- * 
+ *
  * @author sebas
  */
 public class AssetsLoader {
@@ -66,19 +67,24 @@ public class AssetsLoader {
         var sw = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
-                var assetsLoadInfo = new AssetInfo[] {
-                        new AssetInfo("./src/main/java/com/proyecto2estructurasdedatos/assets/cat-kiss.gif", "cat-kiss", AssetType.Image),
-                        new AssetInfo("./src/main/java/com/proyecto2estructurasdedatos/assets/Amazon_icon.png", "amazon-icon",
+
+                String userDirectory = Paths.get("")
+                        .toAbsolutePath()
+                        .toString();
+                System.out.println(userDirectory);
+                var assetsLoadInfo = new AssetInfo[]{
+                        new AssetInfo("./src/Proyecto2EstructurasDeDatos/assets/cat-kiss.gif", "cat-kiss", AssetType.Image),
+                        new AssetInfo("./src/Proyecto2EstructurasDeDatos/assets/Amazon_icon.png", "amazon-icon",
                                 AssetType.Image),
-                        new AssetInfo("./src/main/java/com/proyecto2estructurasdedatos/assets/left-arrow.png", "left-arrow",
+                        new AssetInfo("./src/Proyecto2EstructurasDeDatos/assets/left-arrow.png", "left-arrow",
                                 AssetType.Image),
-                        new AssetInfo("./src/main/java/com/proyecto2estructurasdedatos/assets/cat-dance.gif", "cat-dance",
+                        new AssetInfo("./src/Proyecto2EstructurasDeDatos/assets/cat-dance.gif", "cat-dance",
                                 AssetType.Image),
                 };
 
                 int i = 0;
                 for (var assetInfo : assetsLoadInfo) {
-                    assetLabel.setText(assetInfo.path.substring("./src/main/java/com/proyecto2estructurasdedatos".length()));
+                    assetLabel.setText(assetInfo.path.substring("./src/proyecto2estructurasdedatos/".length()));
                     float porc = ((float) (assetsLoadInfo.length - (assetsLoadInfo.length - i)) / assetsLoadInfo.length)
                             * 100;
                     bar.setValue((int) porc);

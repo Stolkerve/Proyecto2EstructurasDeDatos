@@ -1,17 +1,14 @@
 package Proyecto2EstructurasDeDatos;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.UIDefaults;
-import javax.swing.plaf.FontUIResource;
-
-import com.formdev.flatlaf.FlatDarculaLaf;
 import Proyecto2EstructurasDeDatos.gui.AssetsLoader;
 import Proyecto2EstructurasDeDatos.gui.MainPanel;
 import Proyecto2EstructurasDeDatos.utils.AssetsManager;
+import com.formdev.flatlaf.FlatDarculaLaf;
+
+import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 
 /**
- *
  * @author sebas
  */
 public class MainFrame extends javax.swing.JFrame {

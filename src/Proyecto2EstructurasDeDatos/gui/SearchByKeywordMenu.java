@@ -1,19 +1,12 @@
 package Proyecto2EstructurasDeDatos.gui;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
-
 import Proyecto2EstructurasDeDatos.containers.HashMap;
 import Proyecto2EstructurasDeDatos.containers.List;
 import Proyecto2EstructurasDeDatos.models.Research;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 /**
  * @author sebas
@@ -49,16 +42,17 @@ public class SearchByKeywordMenu extends MenuComponent {
 
         researchsMap.forEach((p, i) -> {
             var r = p.secound;
-            for (var k : r.keywords) {
+            r.keywords.forEach(k -> {
                 var researchs = keywordsMap.find(k);
                 if (researchs != null) {
                     researchs.secound.pushBack(r);
-                    continue;
+                    return null;
                 }
                 var l = new List<Research>();
                 l.pushBack(r);
                 keywordsMap.insert(k, l);
-            }
+                return null;
+            });
             return null;
         });
 

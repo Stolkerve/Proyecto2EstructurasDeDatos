@@ -1,30 +1,18 @@
 package Proyecto2EstructurasDeDatos.gui;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import Proyecto2EstructurasDeDatos.MainFrame;
 import Proyecto2EstructurasDeDatos.containers.HashMap;
 import Proyecto2EstructurasDeDatos.containers.List;
 import Proyecto2EstructurasDeDatos.models.Research;
 import Proyecto2EstructurasDeDatos.utils.AssetsManager;
+import Proyecto2EstructurasDeDatos.utils.LoadFile;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.function.Function;
-
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.filechooser.FileSystemView;
 
 /**
  * @author sebas
@@ -35,7 +23,7 @@ public class MainPanel extends javax.swing.JPanel {
 
     /**
      * Crear el panel principal, instancia los componentes del menu principal
-     * 
+     *
      * @param mainFrame es la instancia del JFrame padre
      */
     public MainPanel(MainFrame mainFrame) {
@@ -52,13 +40,13 @@ public class MainPanel extends javax.swing.JPanel {
         }, (v1, v2) -> {
             return v1.equalsIgnoreCase(v2);
         });
-        loadFile("./src/main/java/com/proyecto2estructurasdedatos/assets/resumenes.json", researchsMap);
+        loadFile("./src/Proyecto2EstructurasDeDatos/assets/resumenes.txt", researchsMap);
 
         this.mainFrame.addWindowListener(new WindowAdapter() {
-           @Override 
-           public void windowClosing(WindowEvent windowEvent) {
-            saveState();
-           }
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                LoadFile.saveState(researchsMap);
+            }
         });
 
         initComponents();
@@ -111,12 +99,12 @@ public class MainPanel extends javax.swing.JPanel {
 
         var quitBtn = new JButton("Salir");
         quitBtn.addActionListener(e -> {
-            saveState();
+            LoadFile.saveState(researchsMap);
             this.mainFrame.dispose();
             System.exit(0);
         });
 
-        menuBtns.pushBack(new JButton[] {
+        menuBtns.pushBack(new JButton[]{
                 loadResearchBtn, analyzeResearchBtn, searchResearchByKeywordBtn,
                 searchResearchByAuthorBtn, quitBtn
         });
@@ -164,7 +152,7 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
     /**
-     * @param Menu insertar un nuevo menu
+     * @param c insertar un nuevo menu
      */
     private void addMenuComponent(MenuComponent c) {
         this.removeAll();
@@ -175,58 +163,13 @@ public class MainPanel extends javax.swing.JPanel {
 
     /**
      * Metodo para cargar el archivo
-     * 
-     * @param file Direccion del archivo
+     *
+     * @param path Direccion del archivo
      * @return HashMap con todos los resumenes
      */
     private void loadFile(String path, HashMap<String, Research> map) {
-        try {
-            var str = Files.readString(Path.of(path));
-            var gson = new Gson();
-            Research[] researchs = gson.fromJson(str, Research[].class);
-            for (var r : researchs) {
-                map.insert(r.title, r);
-            }
-        } catch (Exception e) {
-            
-        }
+        var file = new File(path);
+        LoadFile.loadFile(file, researchsMap, true);
     }
 
-    private void saveState() {
-        if (researchsMap.size() == 0) return;
-        String msg = "Nombre del archivo de los resumenes cargados";
-        String name = JOptionPane.showInputDialog(null, msg, "Guardar el estado", JOptionPane.DEFAULT_OPTION);
-        if (name == null) return;
-        while (name.length() == 0) {
-            name = JOptionPane.showInputDialog(null, msg);
-            if (name == null) return;
-        }
-
-        JFileChooser fileDialog = new JFileChooser("./", FileSystemView.getFileSystemView());
-        fileDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int res = fileDialog.showOpenDialog(null);
-        if (res != JFileChooser.CANCEL_OPTION) {
-            File outputFile = new File(name + ".json");
-            if (outputFile.exists()) {
-                int r = JOptionPane.showConfirmDialog(fileDialog, "El archivo ya existe, deseas sobre escribirlo?", "ERROR", JOptionPane.WARNING_MESSAGE);
-                if (r != JOptionPane.OK_OPTION)
-                    return;
-            }
-            try (FileWriter output = new FileWriter(outputFile)) {
-                var jsonArr = new JsonArray();
-                var gson = new GsonBuilder()
-                        .setPrettyPrinting()
-                        .create();
-                researchsMap.forEach((p, i) -> {
-                    var research = p.secound;
-                    jsonArr.add(gson.toJsonTree(research));
-                    return null;
-                });
-                output.write(gson.toJson(jsonArr));
-                output.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

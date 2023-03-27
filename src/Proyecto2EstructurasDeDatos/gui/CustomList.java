@@ -1,12 +1,7 @@
 package Proyecto2EstructurasDeDatos.gui;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author sebas
@@ -35,7 +30,7 @@ class MyCellRenderer extends DefaultListCellRenderer {
 
     @Override
     public JLabel getListCellRendererComponent(JList<?> list, Object value,
-            int index, boolean isSelected, boolean cellHasFocus) {
+                                               int index, boolean isSelected, boolean cellHasFocus) {
         String text = HTML_1 + String.valueOf(width) + HTML_2 + value.toString()
                 + HTML_3;
         JLabel listCellRendererComponent = (JLabel) super.getListCellRendererComponent(list, text, index, isSelected,

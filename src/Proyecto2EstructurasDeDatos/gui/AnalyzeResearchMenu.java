@@ -1,19 +1,13 @@
 package Proyecto2EstructurasDeDatos.gui;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-
-import java.awt.*;
-
-import java.util.Arrays;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
 import Proyecto2EstructurasDeDatos.containers.HashMap;
 import Proyecto2EstructurasDeDatos.models.Research;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Sebas
@@ -74,34 +68,43 @@ public class AnalyzeResearchMenu extends MenuComponent {
 
         var list = new CustomList(listModel, 100);
         list.addListSelectionListener(e -> {
-            var research = researchsMap.find(list.getSelectedValue());
+            var research = researchsMap.find(list.getSelectedValue()).secound;
             var titleText = String.format(
                     "<h3 style=\"text-align: center\">%s</h3>",
-                    research.secound.title);
-            int i = 0;
-            var authors = "";
-            for (var a : research.secound.authors) {
-                if (i == research.secound.authors.length - 1) {
-                    authors += a + ".";
-                    break;
+                    research.title);
+            var ref = new Object() {
+                int i = 0;
+                String authors = "";
+            };
+            research.authors.forEach(a -> {
+                if (ref.i == research.authors.size() - 1) {
+                    ref.authors += a + ".";
+                    return "";
                 }
-                authors += a + ", ";
-                i++;
-            }
+                ref.authors += a + ", ";
+                ref.i++;
+                return null;
+            });
+            //for (var a : research.secound.authors) {
+            //}
             var authorsText = String.format(
-                    "<p><b>Autores</b>: %s</p>", authors);
+                    "<p><b>Autores</b>: %s</p>", ref.authors);
 
-            var keywordsText = "<ul style=\"margin-left: 10px; list-style-position: inside\">";
-            for (var k : research.secound.keywords) {
-                Pattern pattern = Pattern.compile(k);
-                Matcher matcher = pattern.matcher(research.secound.body);
+            var ref2 = new Object() {
+                String keywordsText = "<ul style=\"margin-left: 10px; list-style-position: inside\">";
+            };
+
+            research.keywords.forEach(k -> {
+                Pattern pattern = Pattern.compile(k, Pattern.CASE_INSENSITIVE);
+                Matcher matcher = pattern.matcher(research.body);
                 var matches = matcher.results().count();
-                keywordsText += String.format("<li><b>%s</b>: tiene <b>%d</b> apariciones en el resumen.</li>", k,
+                ref2.keywordsText += String.format("<li><b>%s</b>: tiene <b>%d</b> apariciones en el resumen.</li>", k,
                         matches);
-            }
-            keywordsText += "</ul>";
+                return null;
+            });
+            ref2.keywordsText += "</ul>";
 
-            researchTextArea.setText(titleText + authorsText + keywordsText);
+            researchTextArea.setText(titleText + authorsText + ref2.keywordsText);
         });
 
         var sp = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,

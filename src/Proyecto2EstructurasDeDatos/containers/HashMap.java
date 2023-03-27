@@ -7,10 +7,10 @@ import java.util.function.Function;
  * Contenedor de llave valor basado en la estructura std::unordered_map
  * de la libreria estandar de c++. Con insersion y busqueda
  * O(1) lo mas posible
- * 
- * @author sebas
+ *
  * @param <T> Key type
  * @param <K> Value type
+ * @author sebas
  */
 public class HashMap<T, K> {
     private List<Pair<T, K>> pairs;
@@ -59,7 +59,7 @@ public class HashMap<T, K> {
 
     /**
      * Inserta un nuevo valor. Modifica el valor si existe!
-     * 
+     *
      * @param key   Llave
      * @param value Valor
      */
@@ -90,8 +90,8 @@ public class HashMap<T, K> {
      */
     public Pair<T, K> forEach(BiFunction<Pair<T, K>, Integer, Pair<T, K>> callback) {
         int i = 0;
-        Node<Pair<T,K>> current = pairs.begin;
-        while(current != null) {
+        Node<Pair<T, K>> current = pairs.begin;
+        while (current != null) {
             var data = current.val;
             current = current.child;
             var ret = callback.apply(data, i);
@@ -125,7 +125,7 @@ public class HashMap<T, K> {
 
 /**
  * Implementacion de iterador para la clase HashMap
- * 
+ *
  * @author sebas
  * @param <T> key type
  * @param <K> value type

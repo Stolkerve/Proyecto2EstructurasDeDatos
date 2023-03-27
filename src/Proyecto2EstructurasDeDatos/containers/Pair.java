@@ -1,9 +1,9 @@
 package Proyecto2EstructurasDeDatos.containers;
 
 /**
- * @author sebas
  * @param <T> First type
  * @param <U> Second type
+ * @author sebas
  */
 public class Pair<T, K> {
     public T first;

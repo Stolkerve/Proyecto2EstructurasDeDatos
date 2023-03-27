@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 /**
  * Contenedor de un elementos enlazados
- * 
+ *
  * @author sebas
  */
 public class List<T> {
@@ -23,7 +23,7 @@ public class List<T> {
      */
     public T forEach(Function<T, T> callback) {
         Node<T> current = this.begin;
-        while(current != null) {
+        while (current != null) {
             T data = current.val;
             current = current.child;
             T ret = callback.apply(data);

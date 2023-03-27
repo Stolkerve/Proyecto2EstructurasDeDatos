@@ -1,8 +1,8 @@
 package Proyecto2EstructurasDeDatos.containers;
 
 /**
- * @author sebas
  * @param <T> Tipo de dato de val
+ * @author sebas
  * @author sebas
  */
 public class Node<T> {

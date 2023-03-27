@@ -4,7 +4,7 @@ import Proyecto2EstructurasDeDatos.containers.List;
 
 /**
  * Singleton que contiene todos los recursos usados por el programa
- * 
+ *
  * @author sebas
  */
 public class AssetsManager {

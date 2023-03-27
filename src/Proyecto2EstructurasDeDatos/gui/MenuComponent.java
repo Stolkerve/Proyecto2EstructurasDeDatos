@@ -1,17 +1,12 @@
 package Proyecto2EstructurasDeDatos.gui;
 
-import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import Proyecto2EstructurasDeDatos.containers.HashMap;
 import Proyecto2EstructurasDeDatos.models.Research;
 import Proyecto2EstructurasDeDatos.utils.AssetsManager;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 /**
  * @author sebas
@@ -22,7 +17,7 @@ public class MenuComponent extends JPanel {
 
     /**
      * Constructor que crea un topbar en el menu
-     * 
+     *
      * @param mainMenuPanel Panel principal
      * @param title         titulo del menu
      */
@@ -49,7 +44,7 @@ public class MenuComponent extends JPanel {
 
     /**
      * Constructor basico
-     * 
+     *
      * @param mainMenuPanel Panel principal
      */
     protected MenuComponent(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap) {
