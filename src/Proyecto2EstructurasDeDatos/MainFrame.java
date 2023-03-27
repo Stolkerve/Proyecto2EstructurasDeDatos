@@ -1,4 +1,4 @@
-package com.proyecto2estructurasdedatos;
+package Proyecto2EstructurasDeDatos;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
