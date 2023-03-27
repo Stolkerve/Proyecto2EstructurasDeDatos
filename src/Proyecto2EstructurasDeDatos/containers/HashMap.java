@@ -21,6 +21,9 @@ public class HashMap<T, K> {
     private Function<T, Integer> hashFunc;
     private BiFunction<T, T, Boolean> cmpFunc;
 
+    /**
+     * Constructor
+     */
     public HashMap() {
         pairs = new List<>();
         buckets = new List[bucketSize];
@@ -35,6 +38,10 @@ public class HashMap<T, K> {
         };
     }
 
+    /**
+     * @param hashFunc funcion hash personalizada
+     * @param cmpFunc funcion de comparacion personalizada
+     */
     public HashMap(Function<T, Integer> hashFunc, BiFunction<T, T, Boolean> cmpFunc) {
         pairs = new List<>();
         buckets = new List[bucketSize];
@@ -101,6 +108,9 @@ public class HashMap<T, K> {
         return null;
     }
 
+    /**
+     * Aumentar el tamano del hashmap
+     */
     private void rehash() {
         if (Float.intBitsToFloat(size) / Float.intBitsToFloat(bucketSize) <= maxLoadFactor)
             return;
@@ -118,34 +128,11 @@ public class HashMap<T, K> {
         buckets = newBuckets;
     }
 
+    /**
+     * @param key llave del valor
+     * @return index en el bucket
+     */
     private int hash(T key) {
         return (hashFunc.apply(key) & 0x7FFFFFFF) % bucketSize;
     }
 }
-
-/**
- * Implementacion de iterador para la clase HashMap
- *
- * @author sebas
- * @param <T> key type
- * @param <K> value type
- */
-// class HashMapIterator<T, K> implements Iterator<Pair<T, K>> {
-//     Node<Pair<T, K>> current;
-
-//     HashMapIterator(List<Pair<T, K>> list) {
-//         current = list.begin;
-//     }
-
-//     @Override
-//     public boolean hasNext() {
-//         return current != null;
-//     }
-
-//     @Override
-//     public Pair<T, K> next() {
-//         var data = current.val;
-//         this.current = this.current.child;
-//         return data;
-//     }
-// }

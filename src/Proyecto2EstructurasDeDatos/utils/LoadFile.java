@@ -24,6 +24,9 @@ enum FileState {
 };
 
 public class LoadFile {
+    /**
+     * @param map Hashmap a guardar
+     */
     public static void saveState(HashMap<String, Research> map) {
 
         if (map.size() == 0) return;
@@ -87,6 +90,12 @@ public class LoadFile {
         }
     }
 
+    /**
+     * @param file Archivo a cargar
+     * @param map hashmap al cual modificar
+     * @param msg mostrar mensajes
+     * @return True si cargo correctamente
+     */
     public static boolean loadFile(File file, HashMap<String, Research> map, boolean msg) {
         try {
             Scanner scanner = new Scanner(file);
