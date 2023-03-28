@@ -14,6 +14,7 @@ import java.awt.*;
  */
 public class SearchByAuthorMenu extends MenuComponent {
     DefaultListModel<String> listModel;
+    DefaultComboBoxModel<String> authorsModel;
     List<Pair<String, Research>> authorsList;
     ResearchView researchView;
     JScrollPane scrollResearchView;
@@ -26,6 +27,7 @@ public class SearchByAuthorMenu extends MenuComponent {
     public SearchByAuthorMenu(MainPanel mainMenuPanel, HashMap<String, Research> researchsMap, String title) {
         super(mainMenuPanel, researchsMap, title);
         listModel = new DefaultListModel<>();
+        authorsModel = new DefaultComboBoxModel<>();
         authorsList = new List<>();
         researchView = new ResearchView();
         scrollResearchView = new JScrollPane(researchView, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -34,6 +36,14 @@ public class SearchByAuthorMenu extends MenuComponent {
         researchsMap.forEach((p, i) -> {
             var r = p.secound;
             r.authors.forEach(a -> {
+                var found = false;
+                for (int j = 0; j < authorsModel.getSize(); j++)
+                    if (authorsModel.getElementAt(j).matches(String.format("(?i).*\\b%s\\b.*", a))) {
+                        found = true;
+                        break;
+                    }
+                if (!found)
+                    authorsModel.addElement(a);
                 authorsList.pushBack(new Pair<>(a, r));
                 return null;
             });
@@ -52,10 +62,12 @@ public class SearchByAuthorMenu extends MenuComponent {
         var researchPanel = new JPanel(new GridBagLayout());
 
         var inputPanel = new JPanel(new BorderLayout());
-        var authorsInput = new JTextField();
+        var authorsInput = new JComboBox<String>();
+        authorsInput.setModel(authorsModel);
+        authorsInput.setSelectedIndex(-1);
         authorsInput.addActionListener(e -> {
-            var authorText = authorsInput.getText();
-            if (authorText.length() != 0) {
+            var authorText = (String) authorsInput.getSelectedItem();
+            if (authorText != null) {
                 listModel.clear();
                 researchView.setText("<span></span>");
                 authorsList.forEach(p -> {
@@ -70,7 +82,7 @@ public class SearchByAuthorMenu extends MenuComponent {
                         JOptionPane.ERROR_MESSAGE);
             }
         });
-        var inputlabel = new JLabel("Ingrese un autor");
+        var inputlabel = new JLabel("Seleccione un autor");
         inputlabel.setBorder(new EmptyBorder(0, 0, 0, 5));
         inputPanel.add(inputlabel, BorderLayout.WEST);
         inputPanel.add(authorsInput, BorderLayout.CENTER);
